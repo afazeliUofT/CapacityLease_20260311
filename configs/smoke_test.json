@@ -1,0 +1,124 @@
+{
+  "description": "Very coarse end-to-end smoke test.",
+  "diagnostics": {
+    "parameter_perturbation_pct": 0.01
+  },
+  "name": "smoke_test",
+  "parameters": {
+    "C": 1000.0,
+    "delta": 0.01,
+    "groups": [
+      {
+        "N": 200,
+        "alpha": 3.0,
+        "beta": 0.2,
+        "epsilon": {
+          "mu": 3.0,
+          "sigma": 0.1
+        },
+        "epsilon_M": {
+          "mu": 2.5,
+          "sigma": 0.1
+        },
+        "epsilon_V": {
+          "mu": 0.5,
+          "sigma": 0.1
+        },
+        "name": "group_1_premium_loyal"
+      },
+      {
+        "N": 200,
+        "alpha": 3.0,
+        "beta": 0.6,
+        "epsilon": {
+          "mu": 2.0,
+          "sigma": 1.0
+        },
+        "epsilon_M": {
+          "mu": 1.5,
+          "sigma": 1.0
+        },
+        "epsilon_V": {
+          "mu": 2.5,
+          "sigma": 1.0
+        },
+        "name": "group_2_tech_savvy"
+      },
+      {
+        "N": 900,
+        "alpha": 2.0,
+        "beta": 0.6,
+        "epsilon": {
+          "mu": 2.0,
+          "sigma": 0.8
+        },
+        "epsilon_M": {
+          "mu": 1.5,
+          "sigma": 0.8
+        },
+        "epsilon_V": {
+          "mu": 1.5,
+          "sigma": 0.8
+        },
+        "name": "group_3_mainstream"
+      },
+      {
+        "N": 700,
+        "alpha": 1.0,
+        "beta": 1.0,
+        "epsilon": {
+          "mu": 0.5,
+          "sigma": 0.1
+        },
+        "epsilon_M": {
+          "mu": 0.2,
+          "sigma": 0.1
+        },
+        "epsilon_V": {
+          "mu": 3.0,
+          "sigma": 0.1
+        },
+        "name": "group_4_budget_conscious"
+      }
+    ],
+    "lambda": 0.1,
+    "pi_V": 500.0,
+    "zeta": 0.01
+  },
+  "reference_claims": {
+    "flex_optimal_C_V": 350.0,
+    "flex_optimal_p_M": 60.0,
+    "flex_optimal_p_V": 10.0,
+    "flex_optimal_served": 1266.0,
+    "flex_optimal_unserved_share": 0.37,
+    "market_optimal_C_V": 100.0,
+    "market_optimal_p_M": 80.0,
+    "market_optimal_p_V": 5.0,
+    "monopoly_revenue": 21300.0
+  },
+  "search": {
+    "flex_accept_residual_inf": 1e-06,
+    "flex_capacity_step": 50,
+    "flex_curve_nm_max": 250,
+    "flex_curve_nm_min": 100,
+    "flex_nm_max": 250,
+    "flex_nm_min": 100,
+    "flex_nm_none_run_stop": 35,
+    "flex_nm_step": 10,
+    "flex_nv_coarse_step": 25,
+    "flex_nv_refine_steps": [
+      5,
+      1
+    ],
+    "flex_reference_capacity": 350,
+    "flex_root_tol": 1e-09,
+    "market_capacity_step": 50,
+    "market_nv_step": 1,
+    "market_price_bound": 500.0,
+    "market_reference_capacity": 100,
+    "monopoly_plot_price_max": 150.0,
+    "monopoly_price_points": 301,
+    "monopoly_price_search_hi": 300.0,
+    "root_tol": 1e-12
+  }
+}
