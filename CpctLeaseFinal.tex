@@ -1,0 +1,916 @@
+\documentclass[12pt, draftclsnofoot, onecolumn]{IEEEtran}
+
+\pagenumbering{gobble}
+\usepackage{xcolor}
+\usepackage{amsmath}    % for advanced math
+\usepackage{url}
+\usepackage{tabularx} % Add this package in the preamble
+\usepackage{mathrsfs}
+\usepackage{makecell}
+\usepackage{amssymb}    % for symbols like \blacksquare
+\usepackage{amsthm}     % for theorem environments and proof environment
+\usepackage{amsfonts}
+\usepackage{graphicx}
+\usepackage{cite}
+\usepackage{enumitem}
+\usepackage{algorithm}
+\usepackage{algorithm} % For the algorithm float
+\usepackage{algpseudocode} % For the
+%\usepackage{algpseudocode}
+%\usepackage{algorithm2e}
+%\usepackage{algpseudocode}
+%\usepackage{algorithmic}
+%\renewcommand{\qedsymbol}{\blacksquare}
+\renewcommand{\proofname}{\textbf{Proof}}
+
+\begin{document}
+	
+	\title{Capacity Leasing to an MVNO in Heterogeneous Wireless Markets: Market-Clearing vs. Flexible Coverage}
+	
+	\author{\hspace{-.1cm}Ali~Fazeli and Raviraj~S.~Adve\\ \textit{Dept. of Elec. and Comp. Eng., Univ. of Toronto, Toronto, Canada}\\ emails: ali.fazeli@utoronto.ca, rsadve@ece.utoronto.ca}
+	\maketitle
+	\newtheorem{remark}{\textbf{Remark}}
+	\newtheorem{lemma}{\textbf{Lemma}}
+	\newtheorem{theorem}{\textbf{Theorem}}
+	\newtheorem{definition}{\textbf{Definition}}
+	\newtheorem{proposition}{\textbf{Proposition}}
+	
+	\vspace{-2cm}
+	\begin{abstract}
+		
+		\textcolor{blue}{This paper studies the feasibility and profitability of spectrum sharing to extend wireless service coverage to underserved user segments of a heterogeneous market. To this end, we establish a framework where a mobile network operator (MNO) examines the profitability of capacity leasing to a mobile virtual network operator (MVNO) dedicated to serving the underserved users. To quantify the strategic economic interaction of MNO and MVNO, we develop a utility-based model that captures user heterogenity through an endogenously-determined equilibrium of target data rate, price and acceptance probability. In this framework, the MNO, as the leader, decides on its own subscriber base plus how much of its capacity to lease.  As a follower, the MVNO determines its service price under a universal-coverage commitment, namely market clearance. To analyze this framework, we derive feasibility and profitability sets, describing conditions under which capacity leasing is viable and beneficial. These sets will then be used to determine the equilibrium decisions of both operators. For comparison, we then relax the MVNO's market-clearing constraint, resulting in a benchmark scenario where the MVNO serves only those users that maximize its own revenue. In our baseline market‑clearing case, leasing about $10\%$ of the MNO’s capacity to an MVNO increases total industry revenue by roughly $15\%$ relative to the monopoly MNO and also raises the MNO’s revenue while serving all users. Relaxing the market‑clearing constraint yields an additional $\approx5\%$ revenue gain but leaves $\approx37\%$ of the market under‑served, highlighting a trade‑off between coverage and profitability.}
+		
+		
+		
+	\end{abstract}
+	\section{Introduction}
+	The exponential growth in mobile data traffic, driven by the proliferation of smart devices and data-intensive applications, has significantly increased the demand for wireless network capacity and efficient spectrum utilization. Mobile Network Operators (MNOs) are under pressure to expand their networks and enhance service quality while also maximizing their revenue. At the same time, traditional regulatory frameworks for spectrum licensing have been critiqued for their inefficiency, as they often restrict license holders to specific services and prevent them from reselling or sharing spectrum~\cite{Daoud10,Matinmikko20}. This has led to under-utilization of valuable spectrum resources, prompting a shift towards more flexible regulatory policies and the emergence of secondary markets that enable spectrum trading~\cite{Daoud10,Alsaedi,Matinmikko20,Book-Y-Wu}. 
+	
+	In this evolving landscape, Mobile Virtual Network Operators (MVNOs) have emerged as key players that can enhance spectrum utilization and offer innovative services without owning physical network infrastructure. MVNOs lease capacity from MNOs to provide services to end-users. This allows MNOs to monetize their excess capacity while enabling MVNOs to enter the market with unique offerings. However, the interactions between MNOs and MVNOs introduce complex economic and strategic considerations, particularly regarding pricing strategies, resource allocation, and competition for subscribers.
+	
+	A major challenge in secondary spectrum markets is the dominant position of incumbent MNOs, who possess significant market power and can engage in monopolistic pricing behaviors that hinder the entry and viability of MVNOs and other new service providers (SPs)~\cite{Posner17,Weyl22,Weyl16,Gamvrelis2023,Fazeli24}. Without suitable regulation, MNOs may set excessively high prices for leasing spectrum, which not only reduces allocative efficiency but also impedes market competition and innovation.
+	
+	Several studies have explored mechanisms to enhance spectrum sharing and improve market efficiency. For instance, dynamic spectrum management mechanisms have been developed for Licensed Shared Access (LSA) systems, introducing fair spectrum allocation algorithms that consider regulatory compliance and penalize misbehaving operators~\cite{Butt18}.
+	
+	
+
+
+\textcolor{blue}{To capture the strategic nature of capacity leasing, the economic interactions between MNOs and MVNOs have been often studied using game theory~\cite{Chen20-Part1,Sacoto20,BenKhalifa18,Chen20b}. In~\cite{Chen20-Part1}, the authors characterize the fundamental incentives for MNOs to lease spectrum to MVNOs under wholesale fees, showing that leasing under-utilized infrastructure can remain profitable even when some subscribers migrate. Works such as~\cite{Sacoto20,BenKhalifa18,Chen20b} consider multi-MNO settings with partnership structures, multi-level pricing, and hybrid bargaining frameworks, and show how cooperative spectrum acquisition can coexist with competitive retail pricing. Other game-theoretic studies focus on multi-stage decision processes. For example, in~\cite{Xiaowen19}, the competition between an MNO and an MVNO is represented as a three-level game that couples bargaining, competition, and subscription stages, while~\cite{Gao11} examines how an MNO’s investment and leasing decisions jointly affect spectrum trading prices and the distribution of subscribers.}
+
+\textcolor{blue}{From the MVNO’s perspective, contract-theoretic and multi-operator models investigate how to design mechanisms and business models that make cooperation attractive for all parties. In~\cite{Chang2020}, incentive schemes for resource allocation in wireless virtualized networks are proposed to stimulate infrastructure-provider participation and improve MVNO payoffs. The business-model analysis in~\cite{Zhu19} studies an ``added-value MVNO'' in a price-competition framework, characterizing how resource-sharing policies and payment plans determine when win-win cooperation is feasible. Related works~\cite{Lotfi17,Zhu19_2} examine similar strategic questions in other settings, including a single-MNO/single-MVNO sequential game without an added-value assumption~\cite{Lotfi17} and a multi-MNO scenario where an added-value MVNO negotiates with multiple MNOs for prioritized access across several host networks in a three-stage Stackelberg game~\cite{Zhu19_2}.} Additionally,~\cite{Mohseni21} develops a spectrum sharing model in which a lending operator provides excess spectrum to a leasing platform for borrowing operators to lease, demonstrating the potential for increased profits and improved spectrum utilization.
+\textcolor{blue}{Related ideas also appear in network virtualization and slicing, where vertical service providers lease resources or slices from infrastructure providers. Recent work studies admission control, uncertainty‑aware resource allocation, and revenue maximization for slice providers under resource and demand constraints, highlighting the complexity of multi‑tenant revenue optimization \cite{Dai23,Gholamipour22,Debbabi24,Fantacci20}.}
+	
+	The above studies mainly focus on specific aspects of the MNO-MVNO interaction, such as pricing strategies or spectrum allocation mechanisms, and do not capture the complex interdependencies between subscription prices, target data rates, user acceptance probabilities, and the economic impact of capacity leasing on both the MNO and MVNO. Moreover, most existing models assume purely profit‑maximizing MVNOs. In practice, however, regulatory or market incentives may push MVNOs toward universal or near‑universal coverage (market clearing), whereas in more flexible contexts they may optimally restrict service to profitable segments and exclude some users. \textcolor{blue}{Understanding these interdependencies is essential as MNOs increasingly seek to utilize excess capacity through MVNO partnerships while maintaining their direct subscriber revenue. Furthermore, regulators require analytical tools to evaluate policies that balance universal service objectives with market efficiency. Without a unified analytical framework, operators lack the tools to determine when capacity leasing enhances revenue and under what conditions market-clearing versus flexible-participation strategies should be adopted.}
+
+	
+	
+	
+	\subsection{Motivation and Contributions}
+	In this paper, we develop a comprehensive analytical model to analyze the MNO's decision-making process in the presence of an MVNO. In this regard, the strategic interactions and trade-offs involved in capacity leasing and pricing are studied. We first consider an MNO with a fixed network capacity, which serves a heterogeneous population of users, characterized by different preferences and sensitivities towards data rates and pricing. We model the users' utility functions, acceptance probabilities, and the implicit relationship between the data rate and the subscription fee to account for their interdependencies.
+	
+	Our model is then extended to include the entry of an MVNO into the market, where the MVNO leases a portion of the MNO's capacity to offer services to users. In this regard, we \emph{first} consider a scenario in which the MVNO aims to maximize the number of served users. To this end, the MVNO offers a subscription fee and target data rate that ensure all user segments will subscribe with a high probability. This model reflects scenarios where regulations mandate or strongly encourage universal coverage. Next, we relax this \textit{market-clearing} assumption and allow the MVNO to exclude some user segments if they are unprofitable. This is referred to as the \emph{flexible-participation} scenario, which often arises when MVNOs have no universal coverage requirement and focus on maximizing net revenue.
+	
+	
+	Our framework assumes the MVNO requests a baseline fee for participating, plus a share of its own subscriber revenue, while the MNO seeks to maximize total income from its direct subscribers and the MVNO’s contributions. Cooperation thus remains feasible only if it yields higher revenue for the MNO than continuing as a monopoly.
+	
+	To analyze the market, we formulate a leader–follower game where the MNO (leader) selects its subscription price and how much capacity to lease, and the MVNO (follower) determines its own pricing and service strategy. Our results demonstrate that, under both market‐clearing and flexible‐participation approaches, capacity leasing can raise the MNO’s revenue beyond its monopoly benchmark. Moreover, although universal coverage extends service to all user segments, focusing on more profitable segments can yield even greater operator revenues. This reveals a trade‐off between maximizing market inclusion and pursuing higher overall profitability.	In summary, the main contributions of this paper are as follows
+	\begin{itemize}
+		\item \textit{Formulation of a Comprehensive Model:} 
+		We develop a detailed model that captures the relationship among subscription prices, target data rates, and user acceptance probabilities. This model provides a rigorous representation of the MNO's decision-making process in a competitive environment with the entry of an MVNO.
+		
+		\item \textit{Market-Clearing MVNO Entry:}
+		We first consider an MVNO that aims to \emph{serve all remaining users}, effectively \emph{clearing the market}. For this setting, we derive \emph{feasibility} and \emph{profitability} conditions that guide the MNO’s capacity-leasing and pricing strategies. These analytical results characterize how the amount of leased capacity and subscription prices should align with user preferences to ensure that the MVNO can operate profitably while guaranteeing service to all users.  
+		A related version of this market‐clearing concept appears in our prior work \cite{Fazeli25}, which considered a special‐case market-clearing MVNO by simplifying the \emph{difference} between MNO and MVNO brand preferences to a deterministic offset. Moreover, \cite{Fazeli25} considers a simpler financial arrangement for MVNO, based on which the MVNO requires only a fixed participation fee. By contrast, the present paper employs a general probabilistic framework for these offsets and introduces a more realistic MVNO financial structure, leading to a more rigorous and practical extension for analyzing market‐clearing MVNO entry.
+		
+		\item \textit{Extension to a Flexible-Participation MVNO Scenario:}
+		We then relax the market-clearing assumption by allowing the MVNO to \emph{exclude} unprofitable user segments. Numerical results show how partial coverage can yield higher combined MNO--MVNO revenues (industry revenue) at the cost of leaving certain users unserved. This highlights a fundamental trade-off between universal coverage and revenue maximization.
+		
+		\item \textit{Insights into Strategic Interactions and Market Dynamics:}
+		Through our theoretical analysis and simulation studies, we demonstrate how the MNO can enhance its profit by strategically leasing capacity to the MVNO under both approaches. We illustrate the impact of user heterogeneity, capacity allocations, and pricing strategies on the operators’ profits and on overall market coverage. 
+	\end{itemize}
+	
+	
+	By addressing the MNO's strategic decision-making in the context of both market-clearing \emph{and} flexible-participation MVNO entry, our work contributes to a deeper understanding of the economic interactions in mobile network markets. Specifically, our analytical framework for market-clearing scenarios reveals how to satisfy feasibility and profitability constraints while serving all potential users. That is while our flexible-participation analysis highlights the trade-offs between maximizing industry revenues and service coverage. 
+	This analysis is important due to the increasing prevalence of MVNOs and the need for MNOs to optimize resource utilization and revenue, while also balancing regulatory objectives such as universal service.
+	\vspace{-.4cm}
+	
+	\subsection{Organization of the Paper}
+	The remainder of the paper is organized as follows.
+	Section II introduces the system model and the MNO’s monopoly revenue‑maximization problem. Section III incorporates a market‑clearing MVNO, derives feasibility and profitability conditions, and formulates the MNO’s leasing strategy; Section IV relaxes market clearing and studies flexible participation. Section V presents numerical results, and Section VI concludes.
+	
+	
+
+	
+	
+	
+	
+	\section{System Model} \label{SectionII}
+	%Table~\ref{tab:parameters} summarizes the key variables used in this paper. Some represent fixed parameters, while others are decision variables or functions that may depend on other quantities. Throughout the paper, functional dependencies are explicitly shown where relevant but may be omitted for clarity when not the focus. 
+	\textcolor{blue}{Table~\ref{tab:parameters} lists the key fixed parameters and decision variables used in the paper.}
+	We consider a set of users partitioned into \(G\) groups, where group \(g\) consists of \(\tilde{N}_g\) members. Each user \(i\) in group \(g\) has a utility function given by 
+	\begin{equation}\label{micro_equation}
+		U_{g}^i(r, p) = \alpha_g \ln(r) - \beta_g p + \epsilon_{g}^i,
+	\end{equation}
+	where \(\alpha_g\) and \(\beta_g\) reflect the group-level sensitivity to data rate \(r\) and price \(p\), respectively, and \(\epsilon_{g}^i\) is a user-specific offset that accounts for individual preferences, such as brand loyalty and unique usage patterns. The term \(\alpha_g \ln(r)\) models diminishing marginal returns in data rate \(r\), while the linear term \(-\beta_g p\) represents sensitivity to price. \textcolor{blue}{This log‑rate/linear‑price utility function is widely adopted in modeling elastic data services~\cite{Kelly98,Chiang07,Johari2004}.}
+	
+	
+	
+	
+	\begin{table}[t]
+		\scriptsize
+		\centering
+		\caption{\textcolor{blue}{Key Symbols}}
+		\label{tab:parameters}
+		\begin{tabularx}{0.98\linewidth}{|l|X|}
+			\hline
+			\textbf{Symbol} & \textbf{Meaning} \\ \hline
+			$G$ & Number of user groups \\ 
+			$\tilde N_g$ & Actual (random) number of users in group $g$ \\ 
+			$N_g=\mathbb{E}[\tilde N_g],\ \ N=\sum_g N_g$ & Expected users in group $g$; total users \\ 
+			$\alpha_g,\ \beta_g$ & Rate- and price-sensitivity of group $g$ \\ 
+			$\epsilon_g$ & Utility offset (noise) for group $g$ \\
+			$B,\ \xi$ & Total bandwidth and spectral efficiency \\
+			$C=B\,\xi$ (Mbps) & Total network capacity \\
+			$\delta\in(0,1]$ & Peak-activity (busy-hour) factor \\ 
+			$\zeta$ & Acceptance-threshold probability (used in feasibility/profitability sets) \\
+			\hline
+			\multicolumn{2}{|c|}{\textbf{Before MVNO entry}} \\ \hline
+			$p,\ r$ & Subscription price; target rate (Mbps) \\
+			$A_g(r,p)$ & Acceptance probability of group $g$ at price $p$ \\
+			$n(p)$ & Total number of subscribers at price $p$ \\
+			$R(p)=p\,n(p)$ & MNO (monopoly) revenue \\
+			\hline
+			\multicolumn{2}{|c|}{\textbf{After MVNO entry}} \\ \hline
+			$C_{\mathrm V},\ C_{\mathrm M}=C-C_{\mathrm V}$ & Capacity leased to MVNO; residual MNO capacity \\
+			$\pi_{\mathrm V}$ & Fixed participation (entry) fee; paid by MNO to MVNO (participation constraint). \\
+			$p_{\mathrm M},\ p_{\mathrm V}$ & Equilibrium subscription prices of MNO and MVNO \\
+			$r_{\mathrm M},\ r_{\mathrm V}$ & Equilibrium target rates of MNO and MVNO \\
+			$n_{\mathrm M}$, $n_{\mathrm V}$ & Number of MNO and MVNO subscribers \\
+			$R_{\mathrm V}$ & MVNO total subscriber revenue \\
+			$R_{\mathrm{MV}}$ & MNO total cooperative revenue  \\
+			$\lambda$ & MVNO retention rate (MVNO keeps $\lambda R_V$; MNO receives $(1-\lambda)R_V)$ \\
+			$\kappa_g,\ \tau_g$ & Group $g$ baseline price offset; rate–price sensitivity ratio \\
+			$\mathcal S_{\mathrm F}(C_{\mathrm V})$ & Feasibility set of $n_{\mathrm V}$ \\
+			$\mathcal S_{\pi}(C_{\mathrm V})$ & Profitability set $\subseteq\mathcal S_{\mathrm F}(C_{\mathrm V})$ \\
+			$\Upsilon(\cdot)$ & Equilibrium function enforcing market clearing \\
+			\hline
+		\end{tabularx}
+	\end{table}
+	
+	
+	
+	
+	
+
+	
+	The MNO holds a total bandwidth \(B\) MHz with a spectral efficiency of \(\xi\) bps/Hz, providing a total network capacity of \(C = B \xi\) Mbps. For each group \(g\), the operator forms expectations about the group size, using the expected value \(N_g = \mathbb{E}[\tilde{N}_g]\) to represent the number of users. Summing across groups, the total expected number of users is \(N = \sum_{g=1}^G N_g\).
+	
+	While \(\epsilon_{g}^i\) is deterministic for each individual, the operator typically lacks precise knowledge of these offsets. Assuming that the population in group \(g\) is large, it is analytically more convenient for the MNO to model \(\{\epsilon_{g}^i\}\) as random variables drawn from a known distribution.  The effective utility for group \(g\) is, therefore, expressed as 
+	\begin{equation}
+		U_g(r, p) = \alpha_g \ln(r) - \beta_g p + \epsilon_g,
+		\label{eq:utility_group_modified_new}
+	\end{equation}
+	where \(\epsilon_g\), referred to as \emph{utility noise}, represents the random variable summarizing group-specific preference offsets. The utility model of \eqref{eq:utility_group_modified_new} captures the statistical variation in preferences within group \(g\) and allows the operator to analyze utility based on the distribution of \(\epsilon_g\). 
+	
+	
+	A user in group $g$ will subscribe to the MNO if its utility is non-negative, i.e., $U_g(r, p)\geq 0$.  From \eqref{eq:utility_group_modified_new}, we define the acceptance probability 
+	\begin{align}
+		A_g(r,p) = \Pr\{U_g(r, p)\geq 0\}= \Pr\{\epsilon_g \geq -\alpha_g \ln(r) + \beta_g p\}
+		= 1-F_{\epsilon_g}(\beta_g p-\alpha_g \ln(r))\label{sub_ind}
+	\end{align}
+	where \( F_{\epsilon_g}(\cdot) \) is the cumulative distribution function (CDF) of \( \epsilon_g \). For this analysis, we assume that users evaluate their utilities based on the average data rate they receive during peak periods. This rate, referred to as the \textit{target rate}, is determined by the expected peak network load and the operator's available capacity. Consequently, when the MNO sets a subscription price \( p \) and specifies a target data rate \( r \) per user for peak periods, it expects the acceptance probability for each user in group \( g \) to be \( A_g(r, p) \).
+	
+	
+	Using \(N_g\) (the expected number of users in group \(g\)) the average number of subscribers from this group can be expressed as \(N_g A_g(r,p)\), resulting in the total expected number
+	\begin{equation}
+		n(r,p) = \sum_{g=1}^G N_g A_g(r,p),
+		\label{total_num}
+	\end{equation}
+	of subscribers. An important point to note is that the target rate  \( r \)  is inherently dependent on the subscription price \( p \) set by the MNO. This dependency arises because the \textit{average} data rate experienced by each user during peak periods is determined by the total network capacity \( C \) divided among the active subscribers at that time. Specifically, the target rate \( r \) can be expressed as a function of \( p \) through the relationship
+	\begin{equation}
+		r = \frac{C}{\delta\cdot n(r,p)}= \frac{C}{\delta \sum_{g=1}^G N_g A_g(r,p)} ,
+		\label{eq:rate_equation}
+	\end{equation}
+	where \( \delta \in (0,1] \) represents the proportion of total subscribers who are active during peak times, and \( n(r,p) \) is the total expected number of subscribers, given in~\eqref{total_num}. \textcolor{blue}{As can be observed from \eqref{eq:rate_equation}, target rates are not free decision variables. Instead, they are implicitly identified by the capacity and the operator's peak-hour load}. 
+	
+	\begin{remark}
+		It is essential to understand that the term “target rate” in the context of this analysis is a theoretical construct for pricing. Specifically, it is an average over the possible scenarios instead of being the real-time data rate that any particular user can achieve at a given time (which is dependent on channel conditions and network factors).
+	\end{remark}
+	It is observed from \eqref{eq:rate_equation}  that rate \( r \) is an implicit function of price \( p \) through the acceptance probability \( A_{g}(r,p) \).  Taking account of this implicit relationship, in order to rigorously approach the MNO's revenue optimization problem, we first need to determine how price $p$ affects the target rate $r$. The following lemma helps establish this interaction.
+	\begin{lemma}\label{Lemma1}
+		Consider the critical price $p_c$, which satisfies 
+		\begin{equation}
+			\sum_{g=1}^{G}N_g F_{\epsilon_g}\left(\beta_g p_c-\alpha_g \ln(C)\right)= N-\frac{1}{\delta},
+		\end{equation}
+		where $N=\sum_{g}N_g$ is the expected number of total users in the network. Under the assumption that the cumulative distribution functions \( F_{\epsilon_g}(\cdot) \) are continuous, 
+		\begin{enumerate}\label{lemma1}
+			\item For all prices $p>p_c$, the MNO is unable to set any target rate $r$.
+			\item For any price $0<p\leq p_c$, there exists a unique target rate $r$ that MNO is able to set.
+		\end{enumerate}
+	\end{lemma}
+	\begin{proof}			
+		We choose a price $p$ and define the function \( \mathcal{F}: (0,C] \rightarrow \mathbb{R} \) as
+		\begin{equation}
+			\mathcal{F}(r) = r - \frac{C}{\delta \sum_{g=1}^{G} N_g A_g(r, p)}.
+			\label{eq:function_f}
+		\end{equation}
+		According to \eqref{eq:rate_equation}, if there exists a rate $r$ for which \( \mathcal{F}(r) = 0 \), then $r$ is a target rate corresponding to $p$. 
+		
+		
+		To proceed, first note that for all $p> 0$, as \( r \to 0^+ \), we have $U_g(r, p) \to -\infty$, hence  \( A_g(r,p) \to 0 \), which implies \( \mathcal{F}(r) \to -\infty \). From \eqref{sub_ind} it is clear that for any $p>0$, $A_g(r,p)$ is a non-decreasing function of $r$. This implies that $\mathcal{F}(r)$ is  increasing in $r$, with its maximum at $r=C$. 
+		
+		To summarize, $\mathcal{F}(r)$ is continuous, starts form $-\infty$ at $r=0$ and  increases to $\mathcal{F}(C)$ at $r=C$. From the Intermediate Value Theorem \cite{Book-Rudin}, we can immediately conclude that $\mathcal{F}(r)=0$ has a unique solution iff  $\mathcal{F}(C)\geq 0$, and has no solution otherwise. Substituting \eqref{sub_ind} into \eqref{eq:function_f} and solving for $\mathcal{F}(C)\geq 0$, we conclude that for all $p$ that satisfy $\sum_{g=1}^{G}N_g F_{\epsilon_g}\left(\beta_g p-\alpha_g \ln(C)\right)\leq N-\frac{1}{\delta}$ there is a unique solution to $\mathcal{F}(r)=0$. But, $F_{\epsilon_g}\left(\beta_g p-\alpha_g \ln(C)\right)$ is a non-decreasing function of $p$. Therefore, by finding the critical price $p_c$, for which $\sum_{g=1}^{G}N_g F_{\epsilon_g}\left(\beta_g p_c-\alpha_g \ln(C)\right)= N-\frac{1}{\delta}$, we can say $\mathcal{F}(r)$ has a unique zero iff $p\leq p_c$ and has no zero otherwise. 		
+	\end{proof}
+
+	\begin{remark}
+		\textcolor{blue}{We model the target rate 
+			$r_o = \frac{C_o}{\delta\,n_o}$
+			as equally shared among active users. While in practice systems employ dynamic allocation or scheduling, our focus is on the strategic economics of pricing and capacity leasing rather than detailed resource scheduling. Because the target rates shape the economics outcomes, the core analytical results remain valid even if the allocation mechanism is more complex.}
+	\end{remark}
+	
+	By applying Lemma~\ref{Lemma1}, we see that for any price \(p > p_c\), no feasible 
+	target rate \(r\) can be guaranteed. Hence, the MNO's revenue is undefined (effectively zero)
+	for \(p > p_c\). For \(0 < p \leq p_c\), Lemma~\ref{Lemma1} ensures there is a \emph{unique} 
+	target rate \(r\) that the MNO can offer. In this range, the expected total number of subscribers 
+	can be treated as a function of price alone, denoted \(n(p)\).
+	To determine \(n(p)\) explicitly, observe from \eqref{eq:rate_equation} that
+	$\ln(r) 
+	\;=\; \ln\!\Bigl(\tfrac{C}{\delta}\Bigr)
+	\;-\; \ln\!\bigl(n(p)\bigr).$
+	Substituting this expression into the acceptance probability 
+	in \eqref{sub_ind} gives
+	\[
+	A_g(r,p) 
+	\;=\; 1 
+	- F_{\epsilon_g}\!\Bigl(\,\beta_g p 
+	\;-\; \alpha_g \ln\!\bigl(\tfrac{C}{\delta}\bigr) 
+	\;+\; \alpha_g \ln\!\bigl(n(p)\bigr)\Bigr).
+	\]
+	Summing across all groups as in \eqref{total_num} then leads to
+	\begin{equation}
+		n(p) 
+		\;=\; N 
+		\;-\; \sum_{g=1}^{G} N_g \,
+		F_{\epsilon_g}\!\Bigl(\beta_g p
+		\;-\;\alpha_g \ln\!\bigl(\tfrac{C}{\delta}\bigr)
+		\;+\;\alpha_g \ln\!\bigl(n(p)\bigr)\Bigr),
+		\label{total_subscribers_modified_new2}
+	\end{equation}
+	which is an implicit equation defining \(n(p)\) for \(0 < p \leq p_c\). 
+	The MNO's revenue is then 
+	\(\displaystyle R(p) \;=\; p\cdot n(p)\).
+	Consequently, its revenue maximization problem can be written in 
+	compact form as
+	\begin{subequations}\label{total_eq}
+		\renewcommand{\theequation}{\theparentequation-\alph{equation}}
+		\begin{align}
+			\mathbf{P1}:\quad
+			&\max_{0 < p \leq p_c} \; R(p) \;=\; p \cdot n(p),
+			\label{eq:revenue_maximization_problem2} \\
+			&\text{subject to } \eqref{total_subscribers_modified_new2}.
+			\label{eq:rate_constraint2}
+		\end{align}
+	\end{subequations}
+	Although the above problem is non-concave and contains an implicitly defined function \( n(p) \), the problem is one-dimensional and a line search is adequate to obtain the global optimum. In the rest of the paper, for this monopolistic setup, the MNO's optimal revenue resulting from solving $\mathbf{P1}$ is denoted by $R^*_{\rm mono}$.
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	\section{Entry of Market-clearing MVNO}
+	We now extend our model to incorporate the entry of an MVNO into the market alongside the existing MNO. Unlike the MNO, the MVNO does not own bandwidth licenses or infrastructure but instead leases a portion of the MNO’s capacity to offer its services. The MVNO operates under a \emph{distinct financial structure}: rather than earning revenue solely from its subscribers, it enters the market only if it is guaranteed a fixed \emph{participation (entry) fee} \( \pi_{\rm V} \) from the MNO, in addition to retaining a variable component, referred to as the \emph{MVNO retention rate} \( \lambda \) (where \( 0 \leq \lambda < 1 \)), of its own subscriber revenue. 
+	\textcolor{blue}{The participation fee $\pi_V$ is a fixed entry payment paid by the MNO to the MVNO upon entry. One should note that, though in this paper we focus on a single‑MNO setting for clarity, in a multi‑MNO market, the MVNO would select the MNO offering the largest participation fee $\pi_V$ (or, more generally, the most favorable pair $(\pi_V,\lambda)$). Furthermore, it is worth clarifying that our model does \emph{not} assume that the MVNO enjoys a wholesale‑price advantage. Instead, the MVNO targets price‑sensitive users and therefore offers a lower target rate, supporting a lower retail price.}
+	
+	The revenue generated by the MVNO’s user base is referred to as \emph{MVNO-contributed revenue} and is denoted by \( R_{\rm V} \). From this revenue, the MVNO retains a portion \( \lambda R_{\rm V} \), which we refer to as \emph{MVNO retained revenue}, while the remaining \( (1 - \lambda) R_{\rm V} \), referred to as \emph{MVNO transfer revenue}, is transferred to the MNO. In addition to this, the MNO collects revenue from its own subscribers, referred to as \emph{MNO direct revenue} and denoted by \( R_{\rm M} \). \textcolor{blue}{After MVNO entry, the expected numbers of subscribers served by the MNO and MVNO, are denoted by $n_M$ and $n_V$, respectively. Under the market‑clearing assumption in this section, every user subscribes to exactly one operator, so $n_M + n_V = N$.} The MVNO’s presence introduces differentiated pricing and specialized services that allow the MNO to serve additional segments of the market that it would otherwise be unable to reach efficiently.
+	
+	
+	
+	
+	The MNO determines the feasibility of leasing a portion \( C_{\rm V} \) of its total capacity \( C \) to the MVNO, with the remainder \( C - C_{\rm V} \) allocated to its own subscribers. %\textcolor{blue}{\textit{Consistent with (5), target rates are not free decision variables; after entry they are implied by the capacity split and active load, i.e., $r_M=C_M/(\delta n_M)$ and $r_V=C_V/(\delta n_V)$.}
+		This decision is driven by a revenue-maximization objective, with the MNO assessing whether cooperation with the MVNO yields a net revenue exceeding its monopoly revenue. If cooperation does not meet this expectation, the MNO opts to remain a monopoly.
+		
+		A key characteristic of this mechanism is that the MVNO is incentivized to structure its pricing and service offerings to maximize \( R_{\rm V} \) because it retains a fraction \( \lambda \) of its own revenue, meaning that a higher \( R_{\rm V} \) directly increases its earnings. Moreover, the MVNO must ensure that the MNO also benefits from cooperation, as the MNO will only agree to lease bandwidth if its total revenue surpasses its monopoly revenue. 
+		
+		A critical aspect of the agreement is the MVNO's \emph{market-clearing objective}, which ensures that, with high probability, all potential users in the market have access to service. This strategy, which expands market participation and enhances overall service accessibility, may be motivated by regulatory requirements or strategic goals to strengthen its bargaining power with the MNO over time.
+		
+		To achieve market clearing, the MVNO determines its subscription price \( p_{\rm V} \) and target rate \( r_{\rm V} \) such that users who are not served by the MNO’s higher-price offering can still subscribe.  Similar to \eqref{eq:utility_group_modified_new}, the utility function for users in group \( g \) when considering operator \( o \) is modeled as
+		\begin{equation}
+			U_{go}(r_o, p_o) = \alpha_g \ln(r_o) - \beta_g p_o + \epsilon_{go},
+			\label{eq:utility_operator2}
+		\end{equation}
+		where \( r_o \) and \( p_o \) are the target rate and subscription price offered by operator \( o \in \{ \mathrm{M}, \mathrm{V} \} \), respectively.
+		A sufficient condition for the MVNO to clear the market is to set its subscription price \( p_{\rm V} \) and target rate \( r_{\rm V} \) such that the utility for any user to join the MVNO remains non-negative with sufficiently high probability. This condition can be represented as
+		\begin{align} \label{eq:strategy}
+			\Pr\{U_{g{\rm V}}(r_{\rm V}, p_{\rm V}) \leq 0 \} = \Pr\{\epsilon_{g{\rm V}} \leq \beta_g p_{\rm V} - \alpha_g \ln(r_{\rm V})\} = F_{\epsilon_{g{\rm V}}}(\beta_g p_{\rm V} - \alpha_g \ln(r_{\rm V})) \leq \zeta, \quad \forall g
+		\end{align}
+		where the acceptance-threshold probability \(\zeta\) is a small positive threshold close to zero. To meet this condition, the MVNO must choose \( p_{\rm V} \) and \( R_{\rm V}(n_{\rm V}) \) to satisfy
+		\begin{equation}\label{strategy2}
+			p_{\rm V} \leq \min_{g} \left\{\kappa_g + \tau_g \ln(r_{\rm V})\right\},
+		\end{equation}
+		where \( \kappa_g = \frac{F^{-1}_{\epsilon_{g{\rm V}}}(\zeta)}{\beta_g} \) is referred to as the \textit{baseline price offset} and \( \tau_g = \frac{\alpha_g}{\beta_g} \) is the \textit{rate–price sensitivity ratio}.
+		
+		To formally model this interaction, we analyze the MNO-MVNO relationship as a Stackelberg leader-follower game. The MNO, as the leader, decides whether leasing capacity to the MVNO is beneficial based on expected revenue outcomes. The \emph{total cooperative revenue} is given by \( R_{\rm MV} = R_{\rm M} + (1 - \lambda) R_{\rm V} - \pi_{\rm V} \), and cooperation is profitable if \( R_{\rm MV} > R^*_{\rm mono} \). 
+		%In the following, we derive the equilibrium strategies that govern these decisions.
+		
+		
+		
+		\subsection{Strategic Analysis of MVNO Responses for MNO Optimization}
+		In this section, we analyze the MVNO's response to the MNO's decisions regarding capacity lease, \(C_{\rm V}\), and target rate, \(r_{\rm M}\). As we will see later, the MNO, acting as the leader, anticipates and incorporates the MVNO's reactions (as the follower) into its revenue maximization strategy.
+		
+		To start our analysis, we first establish an equivalence between the MNO's decision on \(C_{\rm V}\) and \(r_{\rm M}\), and its decision on \(C_{\rm V}\) and the MVNO’s number of subscribers \(n_{\rm V}\). While the MNO may not directly control the MVNO’s number of subscribers, the structure of our model necessitates such a relationship.
+		\begin{remark} \label{equivalence}
+			\textcolor{blue}{The MNO does \emph{not} set \(n_{\rm V}\) directly; given any \((C_{\rm V},p_{\rm M})\), the MVNO’s best response together with market clearing determines \(n_{\rm V}\). Equivalently, with \(r_{\rm M}=C_{\rm M}/(\delta n_{\rm M})\), the equilibrium satisfies}
+			\begin{equation}\label{eq:equivalence}
+				n_{\rm V} = N - \frac{C - C_{\rm V}}{\delta\cdot r_{\rm M}}.
+			\end{equation}
+			This equivalence allows us to simplify the analysis by assuming that the MNO decides on \(C_{\rm V}\) and \(n_{\rm V}\) directly.
+		\end{remark} 	
+		According to Remark \ref{equivalence}, in the rest of the paper, we assume that the MNO decides on \(C_{\rm V}\) and \(n_{\rm V}\) for simplicity.  
+		Given MNO's decisions on \(C_{\rm V}\) and \(n_{\rm V}\), the MVNO's target rate is determined as $r_{\rm V}=\frac{C_{\rm V}}{\delta n_{\rm V}}$. Substituting this expression into \eqref{strategy2}, the MVNO’s pricing must satisfy
+		\begin{equation}
+			p_{\rm V} \leq \min_{g} \left\{\kappa_g + \tau_g \ln\left(\frac{C_{\rm V}}{\delta n_{\rm V}}\right)\right\}.
+			\label{strategy2_given_rm}
+		\end{equation}
+		Given $n_{\rm V}$, the MVNO-contributed revenue from its subscribers, expressed as
+		\begin{equation}
+			R_{\rm V} = p_{\rm V} \cdot n_{\rm V},
+			\label{MVNO_rev}
+		\end{equation}
+		is maximized when \( p_{\rm V} \) is set to its highest possible value. Hence, the MVNO optimally chooses its price as
+		\begin{equation}
+			p_{\rm V} = \min_{g} \left\{\kappa_g + \tau_g \ln\left(\frac{C_{\rm V}}{\delta  n_{\rm V}}\right)\right\},
+			\label{strategy2_max_p}
+		\end{equation}
+		for any $n_{\rm V}$ set by the MNO.
+	
+		To ensure that \( p_{\rm V} \) remains non-negative, it must satisfy $\kappa_g + \tau_g \ln\left(\frac{C_{\rm V}}{\delta n_{\rm V}}\right) \geq 0, \forall g$,
+		which, upon rearranging, and simplifications, leads to
+		\begin{equation}
+			n_{\rm V} \leq  \frac{C_{\rm V}}{\delta}\exp\left(T_{\rm V}\right), \quad T_{\rm V}= \min_{g}\left\{\frac{\kappa_g}{\tau_g}\right\},		\label{positive_p_rearrange2}
+		\end{equation}
+		where $T_{\rm V}$ is a threshold value fully characterized by preferences of user groups for the MVNO.
+		In conclusion, if the condition in \eqref{positive_p_rearrange2} holds, there exists a market-clearing non-negative price \( p_{\rm V} \) at which the MVNO can achieve a positive target rate \( r_{\rm V} \).
+		Building upon the above analysis, we now introduce the following statements to formulate the relationship between the MNO's decisions (on $n_{\rm V}$ and $C_{\rm V}$) and the MVNO’s pricing strategy.
+		\begin{definition}
+			Given \( C_{\rm V} \in (0, C] \), we define the \textit{MNO feasibility set}, \( \mathcal{S}_{\rm F}(C_{\rm V}) \), as the set of all \(n_{\rm V}\) values that the MNO can decide on such that the MVNO can feasibly respond by offering a non-negative subscription price (\(p_{\rm V} \geq 0\)) and a corresponding feasible target rate \(r_{\rm V}\) to its subscribers.
+		\end{definition}
+		
+		\begin{lemma}\label{lemma2}
+			If the set \( \mathcal{S}_{\rm F}(C_{\rm V}) \) is non-empty, then for every \( n_{\rm V} \in \mathcal{S}_{\rm F}(C_{\rm V}) \), the MVNO’s responses \( p_{\rm V} \geq 0 \) and \( r_{\rm V} \) are unique.
+		\end{lemma}
+		\begin{proof}
+			Since \( \mathcal{S}_{\rm F}(C_{\rm V}) \) is non-empty and the parameters \( C_{\rm V} \), \( \delta \), and \( N \) are constants, the MVNO's target rate \( r_{\rm V} \) and price \( p_{\rm V} \) are uniquely determined from $r_{\rm V}=\frac{C_{\rm V}}{\delta n_{\rm V}}$ and from \eqref{strategy2_max_p}, respectively, for any \( n_{\rm V} \in \mathcal{S}_{\rm F}(C_{\rm V}) \). 
+		\end{proof}
+		
+		\begin{lemma}\label{lemma3}
+			Consider the threshold value $T_{\rm V}$, given in \eqref{positive_p_rearrange2}, and set $\mathcal{S}_{\rm F, max}= \left\{ n :  \frac{1}{\delta}  \leq n \leq  N-\frac{1}{\delta}  \right\}$. 
+			For a capacity \( C_{\rm V} \in (0, C] \):
+			
+			
+			1. $\mathcal{S}_{\rm F, max}$ is the largest feasible range for \( n_{\rm V} \)
+			
+			2. If $T_{\rm V} \geq \ln\left(\frac{\delta N - 1}{C_{\rm V}}\right)$,
+			then  $\mathcal{S}_{\rm F}(C_{\rm V}) =\mathcal{S}_{\rm F, max}$.
+			
+			3. If $ -\ln({C_{\rm V}}) \leq T_{\rm V} < \ln\left(\frac{\delta N - 1}{C_{\rm V}}\right) $, then 
+			\(\mathcal{S}_{\rm F}(C_{\rm V})=\{ n :   \frac{1}{\delta} \leq n \leq \frac{C_{\rm V}}{\delta}\exp\left(T_{\rm V}\right)   \}\).
+			
+			4. If $T_{\rm V} < -\ln(C_{\rm V})$,
+			then 	$\mathcal{S}_{\rm F}(C_{\rm V}) = \emptyset$.
+		\end{lemma}	
+		
+		\begin{proof}		1. If \( n_{\rm V} \) exceeds the upper-bound of \(\mathcal{S}_{\rm F, max}\), then \( r_{\rm M}=\frac{C_{\rm M}}{\delta (N-n_{\rm V})}\geq C_{\rm M} \), implying that the MNO's target rate surpasses its available capacity \( C_{\rm M} \). Conversely, if \( n_{\rm V} \) is below the lower bound of \(\mathcal{S}_{\rm F, max}\), the MVNO’s target rate \( r_{\rm V} \) would exceed its allotted capacity \( C_{\rm V} \).
+			
+			2. If \( T_{\rm V} \geq \ln\left((\delta N - 1)/C_{\rm V}\right) \), we can rewrite the condition in \eqref{positive_p_rearrange2} as $n_{\rm V} \leq  \frac{Q C_{\rm V}}{\delta}\exp\left(T_{\rm V}\right)$ for some $Q>1$. The intersection of this interval with set \( \mathcal{S}_{\rm F, max}\) is \(\mathcal{S}_{\rm F, max}\). So, for every \(n_{\rm V}\in \mathcal{S}_{\rm F, max}\) a feasible target rate with its corresponding price $p_{\mathcal V}>0$ exists.
+			
+			3. When \(-\ln(C_{\rm V}) \leq T_{\rm V} < \ln((\delta N - 1)/C_{\rm V})\), the right-hand side of \eqref{positive_p_rearrange2} becomes $\frac{1}{\delta}\leq \frac{C_{\rm V}}{\delta}\exp\left(T_{\rm V}\right)< N-\frac{1}{\delta}$. The intersection of $n_{\rm V}\leq \frac{C_{\rm V}}{\delta}\exp\left(T_{\rm V}\right)< N-1/\delta$ (condition \eqref{positive_p_rearrange2}) and \( \mathcal{S}_{\rm F, max}\) is, therefore, \(\mathcal{S}_{\rm F}(C_{\rm V})=\{ n :   \frac{1}{\delta} \leq n \leq \frac{C_{\rm V}}{\delta}\exp\left(T_{\rm V}\right)   \}\).
+			
+			
+			4. Finally, if \( T_{\rm V} < -\ln(C_{\rm V}) \), then \eqref{positive_p_rearrange2} implies \( n_{\rm V} <    1/\delta  \). However, \(\mathcal{S}_{\rm F, max}\) includes \( n_{\rm V} \geq    1/\delta   \), making the intersection of the two sets an empty set. Consequently, in this case,  \(\mathcal{S}_{\rm F}(C_{\rm V}) = \emptyset\).
+		\end{proof}
+		Lemmas \ref{lemma2} and \ref{lemma3} reveal a necessary condition that the MNO must consider when deciding to lease a capacity \( C_{\rm V} \) to the MVNO. Specifically, if the MNO allocates \( C_{\rm V} \), it must ensure that its choice of target rate \( r_{\rm M} \) does not result in an MVNO subscriber count \( n_{\rm V} \) outside the feasibility set \( \mathcal{S}_{\rm F}(C_{\rm V}) \). Such decisions would otherwise make the MVNO unable to offer a feasible response, meaning that either the target rate \( r_{\rm V} \) would be undefined or the MVNO’s pricing constraint \( p_{\rm V} \geq 0 \) would not hold.
+		
+		Beyond ensuring that \( n_{\rm V} \) remains within the feasibility set \( \mathcal{S}_{\rm F}(C_{\rm V}) \), the MNO must also account for another critical constraint that further refines this set. To clarify, let us express the MVNO-contributed revenue as  
+		\begin{align}
+			R_{\rm V} = n_{\rm V}\cdot \min_{g} \left\{ \kappa_g+ \tau_g \ln \left( \frac{C_{\rm V}}{\delta \, n_{\rm V}} \right) \right\},
+			\label{MVNO_rev2}
+		\end{align}
+		which results from substituting \eqref{strategy2_max_p} into \eqref{MVNO_rev}. After receiving a participation fee of \( \pi_{\rm V} \) from the MNO, the MVNO transfers only a portion \( (1-\lambda) \) of this revenue. For cooperation to be viable, the MVNO’s \emph{net contributed revenue}, defined as \( (1-\lambda) R_{\rm V} - \pi_{\rm V} \), must be non-negative. That is, the MVNO transfer revenue \( (1-\lambda) R_{\rm V} \) must be sufficient to at least cover the participation fee \( \pi_{\rm V} \). If this condition is not met, cooperation becomes unsustainable, as the MNO would effectively incur a loss by allowing the MVNO to operate. This constraint imposes an additional necessary condition on \( n_{\rm V} \), further restricting the feasibility set \( \mathcal{S}_{\rm F}(C_{\rm V}) \). We now formalize this restriction through the definition of the \emph{MNO profitability set}.
+		
+		\begin{definition}\label{Def_profit}
+			Given the leased capacity \( C_{\rm V} \), we define the MNO profitability set \( \mathcal{S}_{\pi }(C_{\rm V})\) as the subset of \( \mathcal{S}_{\rm F}(C_{\rm V}) \) that ensures the MVNO’s net contributed revenue remains non-negative, i.e.,  
+			\begin{equation}\label{profit-set}
+				\mathcal{S}_{\pi }(C_{\rm V})= \left\{n_{\rm V}\in \mathcal{S}_{\rm F}(C_{\rm V}) \mid (1-\lambda) R_{\rm V} - \pi_{\rm V} \geq 0\right\}.
+			\end{equation}
+		\end{definition}
+		Having formally defined the profitability set \(\mathcal{S}_{\pi}(C_{\rm V})\), we next present a systematic procedure to determine \(\mathcal{S}_{\pi}(C_{\rm V})\) for a given proposed capacity \(C_V\). 	
+		\begin{theorem}
+			\label{thm:ProfitabilitySet}
+			Given \(\{\kappa_g,\tau_g\}_{g=1}^G\), \(\delta\), \(C_V\), \(\pi_{\rm V}>0\), and \(N\), Algorithm \ref{alg_profitab} returns precisely the profitability set $\mathcal{S}_{\pi}(C_{\rm V})$ 
+		\end{theorem}
+		\begin{proof}
+			First, Lemma \ref{lemma3} assures that if \( T_{\rm V} < -\ln(C_V) \), then \( \mathcal{S}_{\rm F}(C_{\rm V}) \) is empty. Since \( \mathcal{S}_{\pi}(C_{\rm V}) \subset \mathcal{S}_{\rm F}(C_{\rm V}) \), the algorithm immediately returns \( \varnothing \) in this case. 
+			
+			Next, consider \( f_g(n) = n\cdot \bigl[\kappa_g + \tau_g \ln\bigl(\frac{C_V}{\delta n}\bigr)\bigr] \). Then, from \eqref{MVNO_rev2}, \( R_{\rm V} = \min_g \{f_g(n_{\rm V})\} \). The function \( f_g(n) \) is strictly concave over \( \mathcal{S}_{\rm F,max} \), as its second derivative is non-positive. Consequently, \( R_{\rm V} \), being the pointwise minimum of concave functions, is also concave over this interval. Due to its concavity, for each group \( g \), \( f_g(n) \) is unimodal, which implies \( R_{\rm V} \) is unimodal within \( \mathcal{S}_{\rm F,max} \). Thus, the equation \( f_g(n) = \pi_{\rm V}/(1-\lambda) \) (and hence \( R_{\rm V} = \pi_{\rm V}/(1-\lambda) \)) can have at most two solutions. 
+			
+			The algorithm compiles each group's solution intervals \( f_g(n) = \pi_{\rm V}/(1-\lambda) \) (which can be an empty set, a point or a closed interval) into \( S_g \) and computes their intersection to form \( S_{\pi}(C_{\rm V}) \). As such, the resulting set \( S_{\pi}(C_{\rm V}) \)  collects all \( n_{\rm V} \) for which  \((1-\lambda)R_{\rm V}-\pi_{\rm V}\geq 0 \). 
+		\end{proof}
+		
+
+		\begin{algorithm}[htbp]
+			\small
+			\setlength{\belowcaptionskip}{-15pt}
+			\caption{Profitability set for proposed capacity $C_{\rm V}$}
+			\label{alg_profitab}
+			\begin{algorithmic}[1]
+				\Require $\{\kappa_g,\tau_g\}_{g=1}^G,\;\delta,\;C_V,\;\pi_{\rm V}>0,\;N,\;\lambda$
+				\State Compute $T_{\rm V} = \min_{g}\left\{\frac{\kappa_g}{\tau_g}\right\}$
+				\If {$T_{\rm V} < -\ln(C_V)$}
+				\State $\mathcal{S}_{\pi}(C_{\rm V}) \gets \varnothing$
+				\State \Return $\mathcal{S}_{\pi}(C_{\rm V})$
+				\EndIf
+				\State $\mathcal{S}_{\rm F,max} \gets \bigl[\tfrac{1}{\delta},\,N-\tfrac{1}{\delta}\bigr]$
+				
+				\For{$g = 1$ to $G$}
+				\State $f_g(n) \gets n\Bigl[\kappa_g + \tau_g\,\ln\bigl(\tfrac{C_V}{\delta\,n}\bigr)\Bigr]$
+				\State \textbf{Find up to two solutions} $(n_{g,1},\,n_{g,2})$ of $f_g(n)=\frac{\pi_{\rm V}}{1-\lambda}$ in $\mathcal{S}_{\rm F,max}$
+				
+				\If{no solution in $\mathcal{S}_{\rm F,max}$}
+				\If{$\exists\, n \in \mathcal{S}_{\rm F,max} : f_g(n) \ge \frac{\pi_{\rm V}}{1-\lambda}$}
+				
+				\State $\mathcal{S}_g \gets \mathcal{S}_{\rm F,max}$
+				\Else
+				\State $\mathcal{S}_g \gets \varnothing$
+				\EndIf
+				\ElsIf{only one solution $n_{g,1}$}
+				\State $\mathcal{S}_g \gets \{n_{g,1}\}$
+				\Else
+				\State $\mathcal{S}_g \gets [n_{g,1},\,n_{g,2}]$ \quad\textbf{(assume $n_{g,1}\le n_{g,2}$)}
+				\EndIf
+				\EndFor
+				
+				\State $\mathcal{S}_{\pi}(C_{\rm V}) \gets \bigcap_{g=1}^G \mathcal{S}_g$
+				\State \Return $\mathcal{S}_{\pi}(C_{\rm V})$
+			\end{algorithmic}
+		\end{algorithm}
+
+		
+		
+		
+		To summarize, in this section we analyzed the MVNO’s response to the MNO’s decisions on capacity leasing and subscriber allocation. By characterizing the feasibility and profitability conditions, we have established necessary constraints that the MNO must consider to ensure a sustainable and mutually beneficial cooperation. The results provide a foundation to determine optimal decisions in the MNO’s revenue maximization strategy, which will be further explored in the subsequent section.
+		\subsection{MNO strategy}
+		In this section we explore how the MNO's strategic choices regarding capacity allocation influence market equilibrium and revenue outcomes. Specifically, we formulate an equilibrium condition that connects the MNO's decision variables, $C_{\rm V}$ and $n_{\rm V}$, to its subscription price \(p_{\rm M}\). We show how this equilibrium serves as a foundation for optimizing the MNO’s revenue by balancing its own user base revenue with leasing revenue from the MVNO.	
+		
+		
+		It is implicit in the MVNO's market clearing strategy, formulated by \eqref{eq:strategy}, that a user will choose either the MNO or MVNO if its utility for that operator is larger than that for the other. Particularly, the acceptance probability for user $i$ in group $g$ for joining the MVNO is
+		\begin{align}
+			A_{g{\rm V}} &= \Pr\left\{ U_{g{\rm M}}(r_{\rm M},p_{\rm M}) \leq  U_{g{\rm V}}(r_{\rm V},p_{\rm V}) \right\} = \Pr\left\{  \epsilon_{g{\rm M}}-\epsilon_{g{\rm V}}\leq \beta_g\left(p_{\rm M}-p_{\rm V} \right)+\alpha_g \ln\left(\frac{n_{\rm M}C_{\rm V}}{n_{\rm V}C_{\rm M}}\right) \right\} \nonumber \\
+			&= F_{\epsilon_{g{\rm M}\setminus {\rm V}}}\left(\beta_g\left(p_{\rm M}-p_{\rm V} \right)+\alpha_g \ln\left(\frac{(N-n_{\rm V})C_{\rm V}}{(C-C_{\rm V})n_{\rm V}})\right)\right),\ \ \
+			n_{\rm V}\in \mathcal{S}_{\pi}(C_{\rm V}),
+			\label{eq:acceptance_joint}
+		\end{align}
+		where $F_{\epsilon_{g{\rm M}\setminus {\rm V}}}(\cdot)$ is the (smooth and continuous) CDF of the random variable $\epsilon_{g{\rm M}}-\epsilon_{g{\rm V}}$. The second equality in \eqref{eq:acceptance_joint} arises from applying \eqref{eq:utility_operator2} to the first equality and then rearranging terms.	Substituting \eqref{strategy2_max_p} into \eqref{eq:acceptance_joint} and noting that $n_{\rm V}=\sum_g N_g A_{g{\rm V}}$, $\sum_g N_g=N$  yields
+		\begin{align}
+			\Upsilon(p_{\rm M}, n_{\rm V}; C_{\rm V})=0,\quad \quad n_{\rm V}\in \mathcal{S}_{\pi}(C_{\rm V}), \label{fundamnetal_eq}
+		\end{align}
+		where
+		\begin{align}
+			\Upsilon(p_{\rm M}, n_{\rm V}; C_{\rm V})
+			&= \sum_{g} N_g  F_{\epsilon_{g{\rm M}\setminus {\rm V}}}\Bigg( \beta_g \bigg[\, p_{\rm M} 
+			- \min_g \bigg\{ \kappa_g + \tau_g \ln\left(\frac{C_V}{\delta n_{\rm V}}\right) \bigg\} \, \bigg] \nonumber \\
+			&+ \alpha_g \ln\left(\frac{(N-n_{\rm V})C_{\rm V}}{(C-C_{\rm V})n_{\rm V}}\right) \Bigg)-n_{\rm V},\ \  n_{\rm V}\in \mathcal{S}_{\pi}(C_{\rm V}). \label{eq:acceptance_joint2}
+		\end{align}
+		The expression in \eqref{fundamnetal_eq} indicates that once the MNO determines \(C_{\rm V}\) and selects \(n_{\rm V}\) from the profitability set \(\mathcal{S}_{\pi}(C_{\rm V})\), it does not retain any flexibility in setting the subscription price \(p_{\rm M}\) for its own users. Instead, the choices of \(C_{\rm V}\) and \(n_{\rm V}\) impose the value of \(p_{\rm M}\) that satisfies the equilibrium condition in \eqref{fundamnetal_eq}. 
+		
+		
+		Since \(F_{\epsilon_{g{\rm M}\setminus {\rm V}}}(\cdot)\) is an increasing function with values ranging from $0$ to $1$, the Intermediate Value Theorem ensures that a unique solution for \(p_{\rm M}\) exists for any \(C_{\rm V}\) and \(n_{\rm V}\). If this solution is negative, the choice of \(n_{\rm V}\) is invalid, as negative prices are not feasible. In conclusion, the MNO's decisions on \(C_{\rm V}\) and \(n_{\rm V}\) either enforce a unique feasible \(p_{\rm M}\) or result in invalid configurations for market equilibrium.
+		
+		
+		We are now ready to formulate the MNO's strategy for revenue maximization. To this end, it needs to jointly determine the optimal capacity $C_{\rm V}$ and the user base \( n_{\mathrm{V}} \), to maximize revenue while ensuring market equilibrium.
+		Particularly, the MNO's optimization problem can be formulated as
+		\vspace{-.5cm}
+		\begin{subequations}\label{optimization_problem}
+			\renewcommand{\theequation}{\theparentequation-\alph{equation}}
+			\begin{align}
+				\max_{C_{\rm V},n_{\rm V}} R_{\rm MV}&, \label{optimization_problem-a}\\
+				\text{subject to:} \ \Upsilon(p_{\rm M}, &n_{\rm V}; C_{\rm V})=0,\ \ n_{\rm V}\in \mathcal{S}_{\pi}(C_{\rm V}),\ \ p_{\rm M}\geq 0, \text{where}  \label{optimization_problem-b}
+			\end{align}\label{MPEC}
+		\end{subequations}
+		\vspace{-1cm}
+		\begin{align}
+			R_{\rm MV}=(N-n_{\rm V}) p_{\rm M}+ (1-\lambda)n_{\rm V}\cdot \min_{g} \left\{ \kappa_g+ \tau_g \ln \left( \frac{C_{\rm V}}{\delta \, n_{\rm V}} \right) \right\} - \pi_{\rm V},
+		\end{align}
+		represents the MNO’s total cooperative revenue, which is obtained by summing its direct revenue (first term) and the MVNO’s net contributed revenue (second and third terms). 
+		
+		
+		The optimization of \eqref{MPEC} is a non‐convex mathematical program with equilibrium constraints, for which obtaining a closed‐form solution is generally infeasible. A grid-search approach to approximate the global optimum for this problem is developed below.
+		
+		1. \textit{Capacity partitioning:} The MNO partitions its total capacity, \(C\), into small blocks of size \(C_{\Delta}\). Let
+		$b \;=\;\frac{C}{C_{\Delta}}
+		$
+		denote the total number of capacity blocks. By varying the integer index \(j \in \{1,2,\dots,b\}\), we obtain a range of possible leasing capacities \(C_{\mathrm{V}} = j \, C_{\Delta}\). 
+		
+		
+		2. \textit{Profitability set determination:} For each candidate leasing capacity \(C_{\mathrm{V}} = j \, C_{\Delta}\), the MNO invokes Algorithm~\ref{alg_profitab} to compute the MVNO’s \emph{profitability set} \(\mathcal{S}_{\pi}(j \cdot C_{\Delta})\). 
+		
+		3. \textit{Equilibrium price computation:}  For each \(n_{\mathrm{V}}\) in the set \(\mathcal{S}_{\pi}(j \cdot C_{\Delta})\), the MNO solves the equilibrium‐enforcing equation \eqref{fundamnetal_eq}  to obtain the unique subscription price \(p_{\mathrm{M}}\). Because \(\Upsilon(\cdot)\) is strictly increasing in \(p_{\mathrm{M}}\), a standard root‐finding procedure efficiently computes the required price. If the resulting \(p_{\mathrm{M}}\) is nonnegative, we then evaluate the MNO’s total cooperative revenue from \eqref{optimization_problem-a}.
+		
+		
+		4. \textit{Global search over blocks: } 
+		Repeating Steps $2$–$3$ for each \(j=1,\dots,b\) exhaustively explores all capacity‐leasing configurations. At each iteration, we store the feasible \(\bigl(C_{\mathrm{V}},\,n_{\mathrm{V}},\,p_{\mathrm{M}},\,p_{\mathrm{V}}\bigr)\) tuple that maximizes the MNO’s overall revenue. Upon completing this grid search, we select the \(\bigl(C_{\mathrm{V}}^*,\,n_{\mathrm{V}}^*,\,p_{\mathrm{M}}^*,\,p_{\mathrm{V}}^*\bigr)\) achieving the highest revenue denoted by \(R^*_{\rm MV}\). 
+		
+		
+		5. \textit{Final comparison with monopoly scenario:}  
+		The MNO compares $R^*_{\rm{MV}}$ with the maximum revenue obtained under monopoly, $R^*_{\rm mono}$. If $R^*_{\rm{MV}} > R^*_{\rm mono}$, then the MNO transfers \(C_{\mathrm{V}}^*\) capacity to the MVNO and adopts \(\bigl(p_{\mathrm{M}}^*,\,p_{\mathrm{V}}^*,\,n_{\mathrm{V}}^*\bigr)\). Otherwise, it does not lease and remains the sole service provider, adhering to the solution of \(\mathbf{P1}\).
+		
+		\textcolor{blue}{From a computational standpoint, the complexity of the solver is modest. 
+		If the capacity interval $[0,C]$ is partitioned into $b = C/C_\Delta$ blocks and, for each block, 
+		the profitability set $S_\pi(C_V)$ is sampled over at most $N$ candidate subscriber counts $n_V$ 
+		(bounded by the total user population), then Algorithm~1 together with the grid search in 
+		Steps~1–5 requires
+		$\mathcal{O}\bigl(b\,G I_f + b\,N\,G I_\Upsilon\bigr)
+		$
+		operations, where $G$ is the number of user groups, and $I_f$ and $I_\Upsilon$ upper bound the 
+		iterations of the scalar root-finders solving $f_g(n) = \pi_V/(1-\lambda)$ and 
+		$\Upsilon(p_M,n_V;C_V)=0$, respectively. For the fixed values of $G$, $N$, $I_f$ and $I_\Upsilon$ 
+		used in our simulations, the running time therefore scales essentially linearly with the number of 
+		capacity blocks $b$.}
+		
+		
+		
+		Later, we present numerical simulations to provide additional insights and illustrate the practical implications of the problem.
+			\vspace{-.5cm}
+		\section{Flexible Participation: Relaxing the Market-Clearing Assumption}
+		In the preceding analysis, we focused on a market‐clearing scenario in which the MVNO set its price and service offer so that every user subscribed to exactly one operator. Under that assumption, the MNO's decision variables, namely, the leased capacity \(C_{\mathrm{V}}\) and the target rate \(r_{\mathrm{M}}\), were tightly coupled through the market‐clearing condition. This allowed the MNO to uniquely determine the MVNO’s number of subscribers, \(n_{\mathrm{V}}\), and subscription price, \(p_{\mathrm{V}}\), in a straightforward manner. Specifically, for each choice of \((C_{\mathrm{V}},r_{\mathrm{M}})\), enforcing a single equilibrium condition, given by \eqref{fundamnetal_eq}, ensured that all users not subscribing to the MNO would be served by the MVNO, hence \emph{clearing} the market.	
+		
+		We now relax the market‐clearing assumption, allowing for the possibility that some users choose not to subscribe at all. In this framework, the MNO’s decision on \((C_{\mathrm{V}}, ,r_{\mathrm{M}})\) no longer directly determines the MVNO’s subscriber base, since some users may opt out if both utilities \(U_{g{\rm M}}(r_{\mathrm{M}},p_{\mathrm{M}})\) and \(U_{g{\rm V}}(r_{\mathrm{V}},p_{\mathrm{V}})\) are negative. As before, the natural decision variables for the MNO are \(\bigl(C_{\mathrm{V}}, r_{\mathrm{M}}\bigr)\) or equivalently \(\bigl(C_{\mathrm{V}}, n_{\mathrm{M}}\bigr)\), due to \(n_{\mathrm{M}}=\frac{C-C_{\mathrm{V}}}{\delta r_{\mathrm{M}}}\). However, unlike the market‐clearing case, \( (C_{\mathrm{V}}, r_{\mathrm{M}}) \) and \( (C_{\mathrm{V}}, n_{\mathrm{V}}) \) are no longer interchangeable, as \( n_{\mathrm{V}} \) now depends on the MVNO's endogenous pricing decision. 
+		
+		Thus, in selecting \( (C_{\mathrm{V}}, n_{\mathrm{M}}) \), the MNO must anticipate the MVNO’s best-response strategy, that is, how the MVNO selects \( (p_{\mathrm{V}}, n_{\mathrm{V}}) \) to maximize its own subscription revenue while ensuring that MVNO entry brings the MNO a total revenue exceeding its monopoly benchmark.
+			\vspace{-.5cm}
+		
+		
+		\subsection{MVNO Best Response under Flexible Participation}
+		We now characterize the MVNO’s best‐response decision under flexible market participation, where some users may remain unsubscribed if neither operator’s utility is positive. Let \(\tilde{A}_{g{\rm o}}\) denote the probability that a user in group \(g\) joins operator \(o \in \{\mathrm{M},\mathrm{V}\}\). This probability accounts for both the user’s preference between the two operators \emph{and} the requirement that the chosen operator’s utility be non-negative. Formally, for each \(o' \neq o\),
+		\begin{align}
+			\tilde{A}_{g{\rm o}}
+			\;=\;
+			\Pr\bigl\{
+			U_{g o}(r_o,p_o) \;\ge\;U_{g o'}(r_{o'},p_{o'})&,\ 
+			U_{g o}(r_o,p_o)\;\ge\;0
+			\bigr\}
+			\;=\;\nonumber \\
+			\Pr\bigl\{
+			\epsilon_{g o'} - \epsilon_{g o}
+			\;\le\;
+			\beta_{g}\!\bigl(p_{o'}-p_{o}\bigr)
+			&\;+\;
+			\alpha_{g}\,\ln\!\bigl(\tfrac{n_{o'}\,C_{o}}{n_{o}\,C_{o'}}\bigr),
+			\ 
+			\epsilon_{g o} 
+			\;\ge\;
+			\beta_{g}\,p_{o} \;-\;\alpha_{g}\,\ln\!\bigl(\tfrac{C_{o}}{\delta\,n_{o}}\bigr)
+			\bigr\}.
+		\end{align}
+		A user thus does not subscribe if neither \(U_{g\mathrm{M}}\) nor \(U_{g\mathrm{V}}\) is positive. 
+		From the MNO’s perspective, specifying \(\bigl(C_{\mathrm{V}},n_{\mathrm{M}}\bigr)\) commits it to serving \(n_{\mathrm{M}}\) subscribers using its share of the total capacity, \(C - C_{\mathrm{V}}\). The MVNO then selects \(\bigl(p_{\mathrm{V}},n_{\mathrm{V}}\bigr)\) to maximize its revenue \(p_{\mathrm{V}}\,n_{\mathrm{V}}\). Since \(\bigl(n_{\mathrm{V}},p_{\mathrm{V}}\bigr)\) is no longer uniquely determined by \(\bigl(C_{\mathrm{V}},n_{\mathrm{M}}\bigr)\) in this partial‐participation setting, the MVNO can serve anywhere from a small fraction of the remaining users to nearly all of them, provided those users do not opt out due to negative utilities.
+		
+		
+		In particular, for a given \(\bigl(C_{\mathrm{V}},n_{\mathrm{M}}\bigr)\), the MVNO explores values of \(n_{\mathrm{V}}\) in the set \(\{\,1/\delta,\cdots,\,N-n_{\mathrm{M}}\bigr\}\). For each candidate \(n_{\mathrm{V}}\), it  identifies the subscription price \(p_{\mathrm{V}}\), along with the MNO price \(p_{\mathrm{M}}\), that solves
+		\begin{align}
+			\begin{cases}
+				\Theta_{\mathrm{M}}(p_{\mathrm{M}},p_{\mathrm{V}};\,C_{\mathrm{V}},n_{\mathrm{M}},n_{\mathrm{V}})- n_{\mathrm{M}}
+				= 0, \\
+				\Theta_{\mathrm{V}}(p_{\mathrm{M}},p_{\mathrm{V}};\,C_{\mathrm{V}},n_{\mathrm{M}},n_{\mathrm{V}})
+				- n_{\mathrm{V}}= 0.
+			\end{cases}
+		\end{align}
+		simultaneously, where \(\Theta_{o}(\cdot)=\sum_{g=1}^G N_g\,\tilde{A}_{g{\mathrm{o}}}\). Solving these two equations simultaneously provides the MVNO with \(p_{\mathrm{V}}\) and also \(p_{\mathrm{M}}\). In maximizing \(p_{\mathrm{V}}\,n_{\mathrm{V}}\), the MVNO respects the feasibility constraint
+		\begin{align}
+			R_{\mathrm{MV}}
+			\;=\;
+			n_{\mathrm{M}}\,p_{\mathrm{M}}
+			\;+\;
+			(1-\lambda)\,n_{\mathrm{V}}\,p_{\mathrm{V}}
+			\;-\;
+			\pi_{\mathrm{V}}
+			\;\;\ge\;\;
+			R_{\mathrm{mono}}^*,
+		\end{align}
+		which ensures that the MNO’s total cooperative revenue remains above its monopoly benchmark \(R_{\mathrm{mono}}^*\). 
+		Collecting all constraints, we obtain the following optimization problem
+		\vspace{-.2cm}
+		\begin{equation}
+			\begin{aligned}
+				\max_{\,n_{\mathrm{V}}\,\in\,\{\lceil 1/\delta\rceil,\dots,N - n_{\mathrm{M}}\}}
+				&\quad
+				p_{\mathrm{V}}\;\cdot\;n_{\mathrm{V}}
+				\\[-2pt]
+				\text{subject to:}
+				&\quad
+				\exists\,p_{\mathrm{M}} \,\ge\,0,\;\exists\,p_{\mathrm{V}} \,\ge\,0
+				\\[-2pt]
+				&\qquad
+				\text{such that }
+				\Theta_{\mathrm{M}}\bigl(p_{\mathrm{M}},p_{\mathrm{V}};\,C_{\mathrm{V}},n_{\mathrm{M}},n_{\mathrm{V}}\bigr)\;-\;n_{\mathrm{M}}\;=\;0,
+				\\
+				&\qquad\quad\quad \quad\quad
+				\Theta_{\mathrm{V}}\bigl(p_{\mathrm{M}},p_{\mathrm{V}};\,C_{\mathrm{V}},n_{\mathrm{M}},n_{\mathrm{V}}\bigr)\;-\;n_{\mathrm{V}}\;=\;0,
+				\\
+				&\qquad\quad\quad \quad\quad
+				n_{\mathrm{M}}\,p_{\mathrm{M}}
+				\;+\;
+				(1-\lambda)\,n_{\mathrm{V}}\,p_{\mathrm{V}}
+				\;-\;\pi_{\mathrm{V}}
+				\;\;\ge\;\;R_{\mathrm{mono}}^*.
+			\end{aligned}
+		\end{equation}
+		\subsection{MNO Strategy Under Flexible Market Participation}
+		Having characterized the MVNO’s best‐response decision, we now consider the MNO’s strategy. The MNO’s main objective is to maximize its revenue, taking into account how the MVNO will respond to its choice of \(\bigl(C_{\mathrm{V}},n_{\mathrm{M}}\bigr)\). Specifically, it selects \(\bigl(C_{\mathrm{V}},n_{\mathrm{M}}\bigr)\) so that the MVNO’s corresponding best response maximizes the MNO’s total revenue
+		\[
+		R_{\rm MV}=n_{\mathrm{M}} p^*_{\mathrm{M}}+
+		\bigl(1-\lambda\bigr)\;
+		n^*_{\mathrm{V}} p^*_{\mathrm{V}}-\pi_{\rm V},
+		\]
+		where $\left(p^*_{\mathrm{M}}, n^*_{\mathrm{V}}, p^*_{\mathrm{V}}\right)$
+		denote the MVNO’s best-response to MNO's choice $(C_{\rm V}, n_{\rm M})$. Formally, the MNO’s optimization problem can be written as
+		\begin{equation}
+			\label{eq:MNO_optimization}
+			\begin{aligned}
+				\max_{\,C_{\mathrm{V}},\,n_{\mathrm{M}}}
+				&\quad
+				p_{\mathrm{M}}^*\,n_{\mathrm{M}}
+				\;+\;
+				\bigl(1-\lambda\bigr)\,
+				n_{\mathrm{V}}^*
+				p^*_{\mathrm{V}}
+				\\[6pt]
+				\text{subject to}
+				&\quad
+				0 \;\le\; C_{\mathrm{V}} \;\le\; C,\quad \quad
+				\frac{1}{\delta}\;\le\;n_{\mathrm{M}}\;\le\;N.
+			\end{aligned}
+		\end{equation}
+		Note that, in this formulation, the requirement that the MNO’s revenue must exceed its monopoly benchmark is already embedded in the MVNO’s best response. Consequently, two scenarios arise:
+		
+		1. \textit{Feasible Leasing:} If there exists at least one valid pair \(\bigl(C_{\mathrm{V}}, n_{\mathrm{M}}\bigr)\) such that the MVNO’s best response \(\bigl(p^*_{\mathrm{M}}, n^*_{\mathrm{V}}, p^*_{\mathrm{V}}\bigr)\) is also feasible (i.e., it satisfies the MNO’s revenue condition), then the MNO will lease.
+		
+		2. \textit{Monopoly (No-lease)}: If no such pair \(\bigl(C_{\mathrm{V}}, n_{\mathrm{M}}\bigr)\) yields a feasible MVNO best response, the MNO remains the sole operator, and continues acting as a monopoly.
+		
+			\vspace{-.5cm}
+		
+		\section{Simulation Results}
+		In this section, we present the results of our simulations, analyzing the interplay between the MNO's capacity leasing decisions, pricing strategies, and the resulting market dynamics under both assumptions of MVNO being a market-clearing and flexible-participation entity. By incorporating user heterogeneity and distinct behavioral parameters for different groups, we examine how key economic principles influence the outcomes for both the MNO and the MVNO.
+		
+		
+		\begin{remark}
+			\textcolor{blue} {The parameter values used in our simulations (e.g., \(\alpha_g\), \(\beta_g\)) are chosen primarily to reflect qualitative differences across user groups and are not calibrated to specific real-world data. Hence, the exact numerical outcomes should not be taken as precise market predictions; rather, they serve to illustrate the comparative dynamics between MNO and MVNO under various group characteristics.}  
+		\end{remark}
+		\vspace{-.75cm}
+		\subsection{User Groups and Parameters}
+		To capture the diverse preferences and sensitivities of mobile users, we divide the total population ($N=2000$) into four groups. Each group has a distinct size $N_g$, rate-sensitivity parameter $\alpha_g$, and price-sensitivity parameter $\beta_g$. These \emph{fixed} parameters are summarized in Table~\ref{tab:simulation_parameters}, along with general model constants, including the total capacity $C=1000$~Mbps, the peak-activity factor $\delta=0.1$, and the acceptance-threshold probability $\zeta=0.01$. Furthermore, the MVNO requests a retention rate of $\lambda=0.1$ and participation fee of $\pi_V=500$ unit of currency.  
+		
+		\begin{itemize}
+			\item \textbf{Group~1, Premium-loyal} (\(N_1=200\)): Represents high-income  professionals who strongly value high data rates ($\alpha_1=3$) and show low price-sensitivity ($\beta_1=0.2$).
+			
+			\item \textbf{Group~2, Tech-savvy} (\(N_2=200\)):  These users are sensitive to data rate $\alpha_2=3$, but still mind their budget. As such, their sensitivity to price is moderate, $\beta_2=0.6$.
+			
+			\item \textbf{Group~3, Mainstream} (\(N_3=900\)): Consists of the typical users whose sensitivities to price and rate are moderate ($\alpha_3=2, \beta_3=0.6$). 
+			
+			
+			\item \textbf{Group~4, Budget-conscious} (\(N_4=700\)): This group represents cost-conscious users that have low sensitivity to data rate ($\alpha_4=1$) but are highly sensitive to the price ($\beta_4=1$). 
+			
+			
+			
+			
+			
+			% \textcolor{blue}{The MVNO offers a plan with lower target rate \(r_{\rm V}\) (hence lower cost), which we refer to as a “more affordable” service for price-sensitive users — not reflecting a wholesale-price advantage. Even accounting for the transfer \((1-\lambda)n_{\rm V}p_{\rm V}\) and the fee \(\pi_{\rm V}\), the MVNO can profitably serve this segment at a lower \(p_{\rm V}\) than the MNO’s higher-rate plan.}
+			
+		\end{itemize}
+		
+			\vspace{-.75cm}
+		\subsection{Utility Noises Before and After MVNO Entry}
+		Table~\ref{tab:compact_simulation_parameters} lists the distributions of the utility noises $\epsilon_g$ (MNO-only scenario) and $\epsilon_{g\rm M}, \epsilon_{g\rm V}$ (competitive scenario). Every parameter is modeled as a Gaussian random variable $\mathcal{N}(\mu, \sigma)$, with $\mu$ and $\sigma$ being the mean and standard deviation (STD), respectively. 
+		
+		For simplicity and in the absence of empirical data suggesting a strong correlation in brand preferences, we assume that $\epsilon_{gM}$ and $\epsilon_{gV}$ are independently distributed for each group $g$. Should future empirical studies  indicate a consistent relationship between the MNO and MVNO brand perceptions, this assumption can be relaxed by introducing a correlation term in the joint distribution of $(\epsilon_{g\rm M}, \epsilon_{g\rm V})$. \textcolor{blue}{We expect that when the offsets are positively (negatively) correlated, the profitability set shrinks (expands) because intense (reduced) competition forces both operators into overlapping (distinct) segments.
+		}
+		
+		
+		
+			\vspace{-.5cm}
+		
+		\begin{table}[h!]
+			\centering
+			\begin{minipage}{0.4\textwidth}
+				\centering
+				\caption{User Groups and Model Parameters}
+				\begin{tabular}{|l|c|c|c|}
+					\hline
+					\textbf{Group} & \( N_g \) & \( \alpha_g \) & \( \beta_g \) \\ 
+					\hline
+					$1$ & $200$ & $3$ & $0.2$ \\ 
+					$2$ & $200$ & $3$ & $0.6$ \\ 
+					$3$ & $900$ & $2$ & $0.6$ \\ 
+					$4$ & $700$ & $1$ & $1$ \\ 
+					\hline
+					\multicolumn{4}{|c|}{\textbf{Common Parameters}: \( G=4 \), N=2000, C=1000 Mbps,} \\ 
+					\multicolumn{4}{|c|}{\(\delta=0.1\), \(\zeta=0.01\), \(\pi_V=500\), \(\lambda=0.1\)} \\ 
+					\hline
+				\end{tabular}
+				\label{tab:simulation_parameters}
+			\end{minipage}%
+			\hfill
+			\begin{minipage}{0.45\textwidth}
+				\centering
+				\caption{Simulation Parameters for \(\epsilon_g, \epsilon_{g\rm M}, \epsilon_{g\rm V}\)}
+				\begin{tabular}{|l|c|c|c|}
+					\hline
+					\textbf{Group} & \(\epsilon_g\) & \(\epsilon_{g\rm M}\) & \(\epsilon_{g\rm V}\) \\ 
+					\hline
+					1 & \(\mathcal{N}(3, 0.1)\) & \(\mathcal{N}(2.5, 0.1)\) & \(\mathcal{N}(0.5, 0.1)\) \\ 
+					2 & \(\mathcal{N}(2, 1)\) & \(\mathcal{N}(1.5, 1)\) & \(\mathcal{N}(2.5, 1)\) \\ 
+					3 & \(\mathcal{N}(2, 0.8)\) & \(\mathcal{N}(1.5, 0.8)\) & \(\mathcal{N}(1.5, 0.8)\) \\ 
+					4 & \(\mathcal{N}(0.5, 0.1)\) & \(\mathcal{N}(0.2, 0.1)\) & \(\mathcal{N}(3, 0.1)\) \\ 
+					\hline
+				\end{tabular}
+				\label{tab:compact_simulation_parameters}
+			\end{minipage}
+		\end{table}
+		
+		
+		\subsubsection{Interpretation of Utility Noises}
+		\begin{itemize}
+			\item\textbf{Group~1, Premium-loyal}: High-income professionals who insist on premium plan and best coverage usually stick to the legacy provider (MNO) and have less trust in new entrants. This means high average value for MNO before and after MVNO's entry, $\mu_1=3$, $\mu_{1\rm M}=2.5$ and low average value for the MVNO $\mu_{1\rm V}=0.5$. Users in this group are also assumed to be fairly homogeneous as almost all of them share similar attitudes. Hence, values $\sigma_1=\sigma_{1\rm M}=\sigma_{1\rm V}=0.1$ are chosen to be small.
+			\item \textbf{Group~2, Tech-savvy}: users in this group are expected to have a mild preference/loyalty for a legacy provider (moderate mean-values), but a lot of variability within this group (large standard deviations). As such, we have chosen $\mu_2=2$, $\mu_{2\rm M}=1.5$, $\mu_{2\rm V}=2.5$, and $\sigma_{2}=\sigma_{2\rm M}=\sigma_{2\rm V}=1$. The increase in this group's preference for the MVNO ($\mu_{2\rm V}$) reflects the MVNO's focus on offering tech-oriented services, such as digital content, which are of high interest to this group.
+			\item\textbf{Group~3, Mainstream}: Typical users are expected to have moderate loyalty to the legacy provider and users in the group are also spread moderately in how they deviate from that average loyalty. As such, their mean values for operators, in any situation is moderate $\mu_3=2$, $\mu_{3\rm M}=\mu_{3\rm V}=1.5$. Furthermore, due to moderate homogeneity within the group, STD of utility noises in all cases are chosen moderate $\sigma_{3}=\sigma_{3\rm M}=\sigma_{3\rm V}=0.8$. 
+			
+			\item \textbf{Group~4, Budget-conscious} users in this group are expected to have low loyalty to the MNO (low average values for the MNO), and be fairly homogeneous within the group (low standard deviation). However, as will be observed soon, since the MVNO, naturally offers more affordable services, users in this group are expected to have a large mean value for the MVNO. This logic led to the following choices:  $\mu_4=0.5$, $\mu_{4\rm M}=0.2$, $\mu_{4\rm V}=3$, $\sigma_{4}=\sigma_{4\rm M}=\sigma_{4\rm V}=0.1$.
+		\end{itemize}
+		
+		
+		
+		
+%		\begin{figure}[t]
+%			\centering
+%			\includegraphics[width=.5\linewidth]{monopoly_n_R.eps}
+%			\caption{Monopoly scenario: number of subscribers \(n(p)\) (blue, left axis) and MNO revenue \(R(p)\) (red, right axis) versus subscription price \(p\). Multiple local maxima appear where successive user groups exit the market.}
+%			\label{fig:mono_n_r_vs_p}
+%		\end{figure}
+%		
+		
+		
+	\begin{figure}[t]
+		\centering
+		\begin{minipage}{.42\linewidth}
+			\centering
+			\includegraphics[width=\linewidth]{monopoly_n_R.eps}
+			\caption{Monopoly scenario: number of subscribers \(n(p)\) (blue, left axis) and MNO revenue \(R(p)\) (red, right axis) versus subscription price \(p\). Multiple local maxima appear where successive user groups exit the market.}
+			\label{fig:mono_n_r_vs_p}
+		\end{minipage}%
+		\hfill
+		\begin{minipage}{.42\linewidth}
+			\centering
+			\includegraphics[width=\linewidth]{monopoly_Ag_r.eps}
+			\caption{Monopoly scenario: acceptance probability for each group (blue, left axis) and the resulting target rate \(r(p)\) (red, right axis) versus price \(p\). Note the sharply different exit thresholds across groups.}
+			\label{fig:Mono_acc_gu_r_p}
+		\end{minipage}
+	\end{figure}	
+			\vspace{-.5cm}
+		\begin{remark}
+			To optimize figure presentation, throughout this section, some plots corresponding to different data sets are combined within the same figure using two vertical axes (left and right $y$-axes). In such figures,  the red curves  correspond to the data on the right $y$-axis.
+		\end{remark}
+		\vspace{-.7cm}
+		\subsection{Before MVNO Entry}
+		Figure \ref{fig:mono_n_r_vs_p} shows the relationship between the subscription price \( p \) and both the number of subscribers \( n(p) \) (left $y$-axis) and the revenue \( R(p) \) (right $y$-axis) under a monopoly (no-lease). For very low prices \(p\in[0,4]\), the number of subscribers \(n(p)\) remains at its maximum (all $2000$ users), so revenue \(R(p)\) rises sharply with little or no drop in \(n(p)\).  Shortly after \(p=3\), the most price‐sensitive group (Group $4$) quits in a large block. This is evident  in the sudden drop of \(n(p)\) from $2000$ to about $1300$.  That sharp exit reflects both the high price‐sensitivity of Group $4$ and the low variance in their utility offsets (they collectively leave once the price exceeds a tight threshold).  Each subsequent rise or  decline in \(n(p)\) corresponds to a different group exiting the market.  For instance, after \(p\approx 15\) the large mainstream group (Group $3$) gradually departs. This causes \(n(p)\) drop from about $1300$ to $400$.  Group $2$ then leaves around \(p=35\), and finally, the premium‐loyal Group $1$ ($200$ users) remains until the price increases as high as \(p\approx 110\).  
+		
+		The four local peaks in \(R(p)\) match these group‐by‐group exits.  Whenever a highly sensitive group leaves, the MNO’s revenue first drops but then can recover by raising \(p\) further among the remaining, less price‐sensitive users.  Ultimately, the \emph{global} maximum revenue is attained near \(p=110\), where only Group $1$ subscribes.  In microeconomic terms, each flat segment in curve $n(p)$ indicates near‐zero elasticity for the group that remains (they have little inclination to leave until price passes their next threshold). 
+		
+%		\begin{figure}[t]
+%			\centering
+%			\includegraphics[width=.4\linewidth]{monopoly_Ag_r.eps}
+%			\caption{Monopoly scenario: acceptance probability for each group (blue, left axis) and the resulting target rate \(r(p)\) (red, right axis) versus price \(p\). Note the sharply different exit thresholds across groups.}
+%			\label{fig:Mono_acc_gu_r_p}
+%		\end{figure}
+		
+		Continuing with monopoly scenario, Fig. \ref{fig:Mono_acc_gu_r_p} presents a combined view of the acceptance probability \( A_g \) for each user group (left $y$-axis) and the guaranteed data rate \( r(p) \) (right $y$-axis) as functions of the subscription price \( p \).  Group $4$’s sharp drop at \(p\approx 4\) is consistent with its low utility noise variance and high price‐sensitivity.  By contrast, Groups $2$ and $3$, whose offsets (utility noises) have higher STDs, exit more smoothly across broader price intervals (\(p\approx 15\text{–}25\) for Group $3$, \(p\approx 25\text{–}35\) for Group $2$).  Group $1$ remains near $100\%$ acceptance up to \(p\approx 110\) and then begins a slower decline, despite also having small STD.  
+		
+		A key reason for Group $1$’s slower decline beyond \(p=110\) is the \emph{feedback} from capacity sharing:  Once most other groups have exited, the target rate \(r(p)\) for Group $1$ grows very large (reaching hundreds of Mbps as \(p\to 150\)).  This surge in \(r(p)\) partially offsets the disutility from higher price, so acceptance drops more gently.  In other words, each additional user exit increases the target rate, and hence the remaining marginal user gains enough utility from date rate to stay longer even if the price rises.
+		
+		
+		
+		
+		\begin{figure}[t]
+			\centering
+			\begin{minipage}{.48\linewidth}
+				\centering
+				\includegraphics[width=\linewidth]{MNO_MVNO_CapacityBlocks.eps}
+				\caption{MNO's maximum revenue under varying leased capacity \(C_{\mathrm{V}}\) with and without the assumptions of market clearing. The horizontal line marks the MNO's optimal no‐lease (monopoly) revenue for comparison.}
+				\label{fig:MNO_max_Rev}
+			\end{minipage}%
+			\hfill
+			\begin{minipage}{.48\linewidth}
+				\centering
+				\includegraphics[width=\linewidth]{Optimal_Prices_vs_Capacity.eps}
+				\caption{Equilibrium optimal subscription prices versus leased capacity \(C_{\mathrm{V}}\) with and without market clearing assumption.} 
+				\label{fig:OptimalPrices_vs_Capacity}
+			\end{minipage}
+		\end{figure}
+		
+
+			\vspace{-.5cm}
+		\subsection{MVNO Entry}
+		Figure \ref{fig:MNO_max_Rev} compares how the MNO’s maximum revenue varies with leased capacity \(C_{\mathrm{V}}\) under two different assumptions for the MVNO: market‐clearing (blue curve) and relaxed participation (orange curve).  The dashed horizontal line represents the MNO’s best achievable revenue ($R(p)=21300$) if it acts as monopoly (corresponding to the peak of revenue curve in Fig. \ref{fig:mono_n_r_vs_p}).
+		
+		Considering the revenue curve under the market-clearing scenario (blue curve), \textcolor{blue}{beyond a threshold, leasing more capacity lowers \(p_{\rm M}\) and reduces the MNO's direct revenue faster than the MVNO transfer \((1-\lambda)\,n_{\rm V}\,p_{\rm V}\) grows, causing \(R_{\rm MV}(C_{\rm V})\) to decline, leading to a unimodal shape in Fig.~\ref{fig:MNO_max_Rev}}. One observes that even at relatively small leases such as \(C_{\mathrm{V}}=50\) Mbps, the MNO’s revenue is already above its monopoly benchmark.  Although \(C_{\mathrm{V}}\) is low in this region, the MVNO can still capture certain user segments, particularly the more price‐sensitive ones (e.g., Group~4), and generate revenue for the MNO.  These are users who would likely decline service under the MNO's higher prices but instead remain in the market through the MVNO, adding enough indirect revenue to exceed the monopoly outcome.  As \(C_{\mathrm{V}}\) increases from around $50$ to $100$ Mbps, the MVNO's transfer revenue grows, because the MVNO can accommodate a larger portion of budget‐conscious subscribers without severely diminishing the MNO’s own capacity.  After leasing roughly \(C_{\mathrm{V}}=350\) Mbps, however, the revenue curve begins moving below the no‐lease benchmark. At that stage, the MNO has leased so much spectrum that its direct revenue from its own subscriber base becomes too small to compensate for the MVNO's transfer revenue. This is mainly due to the fact that, with ample capacity, the MVNO must serve all leftover users, including price‐sensitive ones who do not sufficiently value high data rates (e.g., Group~4). As such, the limited revenue collected from these subscribers does not fully compensate the MNO, and lowers overall returns.
+		
+		By contrast, when we relax the market-clearing assumption (orange curve), the MNO’s revenue stays above the monopoly threshold for a considerably broader range of leased capacity.  In this relaxed scenario, the MVNO excludes unprofitable users who would have used network resources without generating sufficient revenue. As a result, leasing out more capacity pays off because the MVNO focuses on moderately profitable segments, like Groups~$2$ and $3$, while the MNO continues charging top rates to its premium users in Group~$1$.  This combination lifts the MNO's revenue (orange curve) to a higher overall maximum, and it remains above the monopoly line to roughly \(C_{\mathrm{V}}=800\) Mbps.  For the same reason, the non‐market‐clearing curve remains above the market‐clearing one across all leased‐capacity values \(C_V\), since the MVNO continues to serve only those subscribers whose payments justify the cost, keeping the MNO’s total revenue consistently higher.
+		
+		
+		
+		
+		
+
+		Figure \ref{fig:OptimalPrices_vs_Capacity} shows how the MNO’s and MVNO’s subscription prices, \(p_{\mathrm{M}}\) and \(p_{\mathrm{V}}\), vary with the leased capacity \(C_{\mathrm{V}}\) under the same setup as before.  The solid lines correspond to market‐clearing setup, while the dashed lines represent flexible participation. The figure shows that in both scenarios, as \(C_{\mathrm{V}}\) increases, the MNO's subscription price \(p_{\mathrm{M}}\) decreases, while the MVNO's subscription price rises.
+		This trend emerges from the MNO’s revenue‐maximizing problem and the resulting equilibrium with the MVNO. Once the MVNO has extra bandwidth, it can increase its target rate at an appealing price, absorbing not only low‐paying users but also some who would otherwise have stayed with the MNO. If the MNO tries not to reduce its subscription price, it would lose too many of those profitable mainstream or even premium subscribers. Consequently, the MNO optimally sets a lower price to retain enough customers, while the MVNO, strengthened by its improved rate offering, raises its own subscription fee.
+		
+		A second key observation in Fig. \ref{fig:OptimalPrices_vs_Capacity} is that, under flexible participation, the MNO ends up leasing more capacity (as discussed previously), which in turn pushes the MVNO’s subscription fee higher and the MNO’s fee lower.  This dynamic results in a smaller gap between the two prices at their respective optimal points.  For instance, when \(C_{\mathrm{V}}\) is optimized under market clearing ($100$ Mbps), the MNO’s fee is roughly $80$ and the MVNO’s is about $5$, resulting in a gap of $75$.  In contrast, under flexible participation, the MNO’s optimal lease grows to $350$ Mbps at which point the MNO’s price drops to around $60$, while the MVNO’s rises to about $10$, narrowing the difference between them to $50$. 
+		
+		
+		\begin{figure}[t]
+			\centering
+			\begin{minipage}{.48\linewidth}
+				\centering
+				\includegraphics[width=\linewidth]{MVNO_MNO_Revenue.eps}
+				\caption{MNO and MVNO revenues \(R_{\mathrm{MV}}\) and \(R_{\mathrm{V}}\) against the MNO's subscriber count \(n_{\mathrm{M}}\) under two scenarios: a market‐clearing case with an optimal lease capacity of \(C_{\mathrm{V}}=100\) Mbps, and a flexible participation case with \(C_{\mathrm{V}}=350\) Mbps.}
+				\label{fig:MVNO_MNO_Revenue}
+			\end{minipage}%
+			\hfill
+			\begin{minipage}{.48\linewidth}
+				\centering
+				\includegraphics[width=\linewidth]{MVNO_MNO_Prices.eps}
+				\caption{Equilibrium subscription prices \(p_{\mathrm{M}}\) (blue) and \(p_{\mathrm{V}}\) (red) as functions of the MNO subscriber count \(n_{\mathrm{M}}\) for two scenarios: market‐clearing at an optimal lease capacity of \(C_{\mathrm{V}}=100\,\mathrm{Mbps}\) and flexible participation at \(C_{\mathrm{V}}=350\,\mathrm{Mbps}\).}
+				\label{fig:MVNO_MNO_Prices}
+			\end{minipage}
+		\end{figure}
+		
+		
+
+		
+		
+		Figure \ref{fig:MVNO_MNO_Revenue} compares the MNO’s and MVNO’s revenues, \(R_{\mathrm{MV}}\) and \(R_{\mathrm{V}}\), against the MNO’s subscriber count \(n_{\mathrm{M}}\) under two scenarios: a market‐clearing lease of $C_{\mathrm{V}}=100$ Mbps and a flexible‐participation lease of \(C_{\mathrm{V}}=350\) Mbps.  Meanwhile, Fig. \ref{fig:MVNO_MNO_Prices} shows how the subscription prices \(p_{\mathrm{M}}\) (left axis) and \(p_{\mathrm{V}}\) (right axis) change with \(n_{\mathrm{M}}\) in these same scenarios.
+		
+		A key observation from Fig. \ref{fig:MVNO_MNO_Revenue} is that the MNO’s revenue peaks around \(n_{\mathrm{M}}\approx200\) in both market‐clearing and flexible‐participation setups, though the lease capacities differ significantly. In practice, the MNO is attracting only its highest‐value segments. This mainly includes premium users (Group $1$) who are willing to pay a higher subscription fee as long as they receive sufficient data rates. This strategy emerges clearly in Fig. \ref{fig:MVNO_MNO_Prices}, where the MNO’s price at \(n_{\mathrm{M}}\approx200\) is near $80$ under market clearing and roughly $60$ under flexible participation.
+		
+
+		
+		
+		Around the optimal subscriber count $n_{\rm M}=200$, however, both figures show a sharp drop in the MNO’s revenue and price if it tries to expand its subscriber base.  Under market clearing, \(p_{\mathrm{M}}\) drops from around $80$ to roughly $30$ when \(n_{\mathrm{M}}\) just exceeds $200$. Similarly, under flexible participation, the fall is from about $60$ to $25$.  This happens because the MNO must lower its fee significantly to appeal to more mainstream or cost‐sensitive groups, which then forces a new equilibrium with the MVNO and reduces overall profit margins.  This means, once the MNO moves past that premium tier, it can no longer charge a sufficiently high price to maintain earlier revenue levels.
+		
+		
+		Another interesting observation is that both the MNO and the MVNO earn more under flexible participation than under market clearing.  Specifically, the MNO’s revenue increases from about $22{,}700$ to $23{,}500$, and the MVNO’s increases from around $1{,}800$ to $2{,}300$.  In other words, the industry’s total revenue (MNO plus MVNO) increases by roughly $5\%$ under flexible participation, rising from $24{,}500$ to around $25{,}800$.  This rise occurs mainly because the MVNO is free to exclude very low‐paying users, focusing on a smaller but more profitable segments.  
+		
+		
+		The tradeoff, however, is that significantly fewer subscribers end up being served. Under market clearing, all $2{,}000$ users obtain service, with the MVNO covering about $1{,}800$ of them at \(n_{\mathrm{M}}=200\). Under flexible participation, only about $1{,}266$ users subscribe ($1{,}050$ to the MVNO and $216$ to the MNO), leaving over $700$ users (roughly $37\%$ of the market) without service. Consequently, the target rates each operator can offer also change substantially. In the market‐clearing scenario, the MNO’s retained $900$~Mbps is shared by $200$ subscribers at peak load (activity factor \(\delta = 0.1\)), yielding about $45$~Mbps per user, whereas the MVNO must share $100$~Mbps among approximately $1{,}800$ subscribers, leading to a mere $0.55$~Mbps on average. Under flexible participation, the MNO allocates $350$~Mbps to the MVNO and keeps $650$~Mbps for itself, which it shares among $216$ subscribers (a target rate of $\approx30$~Mbps), while the MVNO’s $350$~Mbps covers its $1{,}050$ customers at roughly $3.33$~Mbps each. To summarize, flexible participation increases industry profits by about \(5\%\), but it lowers the MNO's target rate (from \(45\) Mbps to \(30\) Mbps) and raises the MVNO's (from \(0.55\) Mbps to \(3.33\) Mbps), at the cost of excluding many budget‐conscious users.
+		
+		
+		From a regulatory or social‐planner perspective, these findings raise important questions. Although flexible participation lifts industry revenue by about $5\%$, it also leaves approximately $37\%$ more users unserved compared to market clearing. Policymakers may thus need to implement frameworks or incentives that balance the industry's objective of higher profits with the goal of maintaining broad service coverage. This way, they ensure that efficiency gains do not come at the expense of substantial market exclusion.
+		
+		
+		
+		
+		
+		
+			\vspace{-.5cm}
+		
+		
+		
+		
+		\section{Conclusion} \label{secV}
+		This paper explored how an MNO can leverage an MVNO’s market‐clearing strategy to derive greater value from its available capacity. By incorporating user heterogeneity and strategic capacity leasing, the industry's total revenue increased by around $15\%$. We then relaxed the market‐clearing assumption to allow the MVNO to exclude certain low‐revenue user segments, raising industry revenue by an additional $5\%$ at the cost of leaving a roughly $37\%$ of the market unserved. 
+		These findings revealed a key trade‐off between maximizing profit and achieving universal coverage, offering new perspectives for operators and policymakers in designing equitable and efficient capacity‐sharing frameworks. 
+		Essentially, from a policymaker’s perspective, the modest incremental gains from excluding a substantial portion of users highlights a fundamental policy challenge: although overall profitability rises, a large fraction of the population loses access to essential communication services. Our results suggest that regulatory interventions, such as coverage mandates or universal‐service incentives, may be needed to balance profitability with consumer welfare. \textcolor{blue}{Our results show that appropriate policy mechanisms can promote broader coverage without risking industry revenue gains; a full mechanism-design formulation is therefore a promising direction for future research. A further extension is to relax the fixed-capacity assumption and consider stochastic or adaptive capacity, which we also leave for future study.
+		}
+		
+		
+			\vspace{-.5cm}
+		
+		
+		
+		
+		
+		
+		
+		\bibliographystyle{ieeetr}
+		\bibliography{Sample_BIB_File}
+		
+		
+		
+		
+		
+		
+		
+	\end{document}
