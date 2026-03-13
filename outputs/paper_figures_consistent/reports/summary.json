@@ -1,0 +1,40 @@
+{
+  "config_name": "paper_figures_consistent",
+  "flex_best": {
+    "C_V": 30.0,
+    "best_R_MV": 23367.081834050397,
+    "best_R_V_retained": 1051.548050873425,
+    "best_R_V_subscriber": 5515.480508734247,
+    "best_R_industry_net": 24418.629884923823,
+    "best_method": "root.hybr",
+    "best_n_M": 199.0,
+    "best_n_V": 1594.0,
+    "best_p_M": 94.99070038286219,
+    "best_p_V": 3.4601508837730535,
+    "best_r_M": 487.43718592964825,
+    "best_r_V": 1.8820577164366374,
+    "best_residual_inf": 4.3570480556809343e-10
+  },
+  "market_best": {
+    "C_V": 75.0,
+    "best_R_MV": 22760.895682046917,
+    "best_R_V_retained": 1248.028423440843,
+    "best_R_V_subscriber": 7480.284234408429,
+    "best_R_industry_net": 24008.924105487764,
+    "best_n_M": 199.0,
+    "best_n_V": 1801.0,
+    "best_p_M": 83.05849181446901,
+    "best_p_V": 4.153406015773697,
+    "best_r_M": 464.8241206030151,
+    "best_r_V": 4.16435313714603,
+    "best_residual": 4.547473508864641e-13
+  },
+  "monopoly_optimum": {
+    "critical_price": 118.61632918473211,
+    "optimal_price": 106.80000000000001,
+    "optimal_revenue": 21319.524504033932,
+    "optimal_subscribers": 199.62101595537388,
+    "optimal_target_rate": 500.94925888141665
+  },
+  "output_root": "/home/rsadve1/scratch/CapacityLease_20260311/outputs/paper_figures_consistent"
+}
