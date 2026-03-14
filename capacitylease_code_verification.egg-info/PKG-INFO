@@ -1,5 +1,0 @@
-Metadata-Version: 2.4
-Name: capacitylease-code-verification
-Version: 0.1.0
-Summary: Simulation and numerical verification package for CapacityLease paper
-Requires-Python: >=3.10

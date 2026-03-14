@@ -1,7 +1,14 @@
 {
   "critical_price": 118.61632918473211,
-  "optimal_price": 106.80000000000001,
-  "optimal_revenue": 21319.524504033932,
-  "optimal_subscribers": 199.62101595537388,
-  "optimal_target_rate": 500.94925888141665
+  "grid_optimal_price": 106.80000000000001,
+  "grid_optimal_revenue": 21319.524504033932,
+  "grid_optimal_subscribers": 199.62101595537388,
+  "grid_optimal_target_rate": 500.94925888141665,
+  "optimal_price": 106.77900329046938,
+  "optimal_revenue": 21319.718960790975,
+  "optimal_subscribers": 199.6620899597204,
+  "optimal_target_rate": 500.84620480619975,
+  "optimizer_method": "scipy.optimize.minimize_scalar(method='bounded')",
+  "optimizer_nfev": 18,
+  "optimizer_success": true
 }
