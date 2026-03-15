@@ -1,0 +1,42 @@
+{
+  "actual": {
+    "flex_optimal_C_V": 28.0,
+    "flex_optimal_industry_revenue": 24401.990689535065,
+    "flex_optimal_n_M": 199.0,
+    "flex_optimal_n_V": 1568.0,
+    "flex_optimal_p_M": 95.75905357919224,
+    "flex_optimal_p_V": 3.4093998898442677,
+    "flex_optimal_served": 1767.0,
+    "flex_optimal_unserved_share": 0.11650000000000005,
+    "market_optimal_C_V": 76.0,
+    "market_optimal_industry_revenue": 24054.4598426816,
+    "market_optimal_n_M": 199.0,
+    "market_optimal_n_V": 1801.0,
+    "market_optimal_p_M": 82.88773918099102,
+    "market_optimal_p_V": 4.1975567716071005,
+    "monopoly_price": 106.77900329046938,
+    "monopoly_revenue": 21319.718960790975
+  },
+  "claims": {
+    "flex_optimal_C_V": 350.0,
+    "flex_optimal_p_M": 60.0,
+    "flex_optimal_p_V": 10.0,
+    "flex_optimal_served": 1266.0,
+    "flex_optimal_unserved_share": 0.37,
+    "market_optimal_C_V": 100.0,
+    "market_optimal_p_M": 80.0,
+    "market_optimal_p_V": 5.0,
+    "monopoly_revenue": 21300.0
+  },
+  "errors": {
+    "flex_optimal_C_V": -322.0,
+    "flex_optimal_p_M": 35.75905357919224,
+    "flex_optimal_p_V": -6.590600110155732,
+    "flex_optimal_served": 501.0,
+    "flex_optimal_unserved_share": -0.25349999999999995,
+    "market_optimal_C_V": -24.0,
+    "market_optimal_p_M": 2.8877391809910193,
+    "market_optimal_p_V": -0.8024432283928995,
+    "monopoly_revenue": 19.71896079097496
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "config_name": "paper_strict_text",
+  "flex_best": {
+    "C_V": 120.0,
+    "best_R_MV": 16018.536165321519,
+    "best_R_V_retained": 838.4643565187994,
+    "best_R_V_subscriber": 3384.643565187993,
+    "best_R_industry_net": 16857.000521840317,
+    "best_method": "default:least_squares",
+    "best_n_M": 199.0,
+    "best_n_V": 1188.0,
+    "best_p_M": 67.70028621433329,
+    "best_p_V": 2.849026570023563,
+    "best_r_M": 44.22110552763819,
+    "best_r_V": 1.01010101010101,
+    "best_residual_inf": 5.684341886080802e-14
+  },
+  "market_best": {
+    "C_V": 0.0,
+    "best_R_MV": 14426.941532580156,
+    "best_R_V_retained": 0.0,
+    "best_R_V_subscriber": 0.0,
+    "best_R_industry_net": 14426.941532580156,
+    "best_n_M": 199.43293303805353,
+    "best_n_V": 0.0,
+    "best_p_M": 72.3398152592349,
+    "best_p_V": NaN,
+    "best_r_M": 50.142169839581676,
+    "best_r_V": NaN,
+    "best_residual": 0.0
+  },
+  "monopoly_optimum": {
+    "critical_price": 119.43875599820765,
+    "grid_optimal_price": 72.35000000000001,
+    "grid_optimal_revenue": 14426.905190534348,
+    "grid_optimal_subscribers": 199.40435646903035,
+    "grid_optimal_target_rate": 50.14935569651462,
+    "optimal_price": 72.3398152592349,
+    "optimal_revenue": 14426.941532580156,
+    "optimal_subscribers": 199.43293303805353,
+    "optimal_target_rate": 50.142169839581676,
+    "optimizer_method": "scipy.optimize.minimize_scalar(method='bounded')",
+    "optimizer_nfev": 16,
+    "optimizer_success": true
+  },
+  "output_root": "/home/rsadve1/scratch/CapacityLease_20260311/outputs/paper_strict_text"
+}

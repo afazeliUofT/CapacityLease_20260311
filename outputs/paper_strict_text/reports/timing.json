@@ -1,0 +1,9 @@
+{
+  "flex_capacity_sweep_seconds": 8636.640081635676,
+  "flex_curve_seconds": 1829.194161074236,
+  "market_capacity_sweep_seconds": 7.294898780994117,
+  "market_curve_seconds": 9.379349648952484e-06,
+  "monopoly_seconds": 0.5998095441609621,
+  "plotting_seconds": 1.8988954098895192,
+  "total_reproduce_seconds": 10475.627855824307
+}

@@ -1,0 +1,785 @@
+{
+  "baseline_claims": {
+    "actual": {
+      "flex_optimal_C_V": 28.0,
+      "flex_optimal_industry_revenue": 24401.990689535065,
+      "flex_optimal_n_M": 199.0,
+      "flex_optimal_n_V": 1568.0,
+      "flex_optimal_p_M": 95.75905357919224,
+      "flex_optimal_p_V": 3.4093998898442677,
+      "flex_optimal_served": 1767.0,
+      "flex_optimal_unserved_share": 0.11650000000000005,
+      "market_optimal_C_V": 76.0,
+      "market_optimal_industry_revenue": 24054.4598426816,
+      "market_optimal_n_M": 199.0,
+      "market_optimal_n_V": 1801.0,
+      "market_optimal_p_M": 82.88773918099102,
+      "market_optimal_p_V": 4.1975567716071005,
+      "monopoly_price": 106.77900329046938,
+      "monopoly_revenue": 21319.718960790975
+    },
+    "claims": {
+      "flex_optimal_C_V": 350.0,
+      "flex_optimal_p_M": 60.0,
+      "flex_optimal_p_V": 10.0,
+      "flex_optimal_served": 1266.0,
+      "flex_optimal_unserved_share": 0.37,
+      "market_optimal_C_V": 100.0,
+      "market_optimal_p_M": 80.0,
+      "market_optimal_p_V": 5.0,
+      "monopoly_revenue": 21300.0
+    },
+    "errors": {
+      "flex_optimal_C_V": -322.0,
+      "flex_optimal_p_M": 35.75905357919224,
+      "flex_optimal_p_V": -6.590600110155732,
+      "flex_optimal_served": 501.0,
+      "flex_optimal_unserved_share": -0.25349999999999995,
+      "market_optimal_C_V": -24.0,
+      "market_optimal_p_M": 2.8877391809910193,
+      "market_optimal_p_V": -0.8024432283928995,
+      "monopoly_revenue": 19.71896079097496
+    }
+  },
+  "perturbation_pct": 0.01,
+  "rows": [
+    {
+      "base_value": 1000.0,
+      "direction": "down",
+      "flex_R_MV_at_ref_CV": 21772.807974033232,
+      "market_R_MV_at_ref_CV": 22384.321682311875,
+      "monopoly_revenue": 21289.61894051816,
+      "parameter": "C",
+      "trial_value": 990.0
+    },
+    {
+      "base_value": 1000.0,
+      "direction": "up",
+      "flex_R_MV_at_ref_CV": 21864.19980027349,
+      "market_R_MV_at_ref_CV": 22450.657745614262,
+      "monopoly_revenue": 21349.519563578,
+      "parameter": "C",
+      "trial_value": 1010.0
+    },
+    {
+      "base_value": 0.01,
+      "direction": "down",
+      "flex_R_MV_at_ref_CV": 21856.2426586209,
+      "market_R_MV_at_ref_CV": 22435.964590817064,
+      "monopoly_revenue": 21349.819072595128,
+      "parameter": "delta",
+      "trial_value": 0.0099
+    },
+    {
+      "base_value": 0.01,
+      "direction": "up",
+      "flex_R_MV_at_ref_CV": 21781.382355262504,
+      "market_R_MV_at_ref_CV": 22399.565377477655,
+      "monopoly_revenue": 21289.918447723012,
+      "parameter": "delta",
+      "trial_value": 0.0101
+    },
+    {
+      "base_value": 200.0,
+      "direction": "down",
+      "flex_R_MV_at_ref_CV": 21739.753269921523,
+      "market_R_MV_at_ref_CV": 22290.68613961526,
+      "monopoly_revenue": 21136.320881869167,
+      "parameter": "group_1_N",
+      "trial_value": 198.0
+    },
+    {
+      "base_value": 200.0,
+      "direction": "up",
+      "flex_R_MV_at_ref_CV": 21897.649819271726,
+      "market_R_MV_at_ref_CV": 22544.355934128525,
+      "monopoly_revenue": 21502.81763220012,
+      "parameter": "group_1_N",
+      "trial_value": 202.0
+    },
+    {
+      "base_value": 3.0,
+      "direction": "down",
+      "flex_R_MV_at_ref_CV": 21751.783004550547,
+      "market_R_MV_at_ref_CV": 22286.333474228308,
+      "monopoly_revenue": 21133.546310312366,
+      "parameter": "group_1_alpha",
+      "trial_value": 2.9699999999999998
+    },
+    {
+      "base_value": 3.0,
+      "direction": "up",
+      "flex_R_MV_at_ref_CV": 21885.92781153955,
+      "market_R_MV_at_ref_CV": 22549.014494966224,
+      "monopoly_revenue": 21505.89407702452,
+      "parameter": "group_1_alpha",
+      "trial_value": 3.0300000000000002
+    },
+    {
+      "base_value": 0.2,
+      "direction": "down",
+      "flex_R_MV_at_ref_CV": 21903.315357850483,
+      "market_R_MV_at_ref_CV": 22566.78100631166,
+      "monopoly_revenue": 21535.069657364664,
+      "parameter": "group_1_beta",
+      "trial_value": 0.198
+    },
+    {
+      "base_value": 0.2,
+      "direction": "up",
+      "flex_R_MV_at_ref_CV": 21736.067932493188,
+      "market_R_MV_at_ref_CV": 22271.519577174327,
+      "monopoly_revenue": 21108.63263444655,
+      "parameter": "group_1_beta",
+      "trial_value": 0.202
+    },
+    {
+      "base_value": 3.0,
+      "direction": "down",
+      "flex_R_MV_at_ref_CV": 21818.85540804505,
+      "market_R_MV_at_ref_CV": 22417.673984597313,
+      "monopoly_revenue": 21289.76969248675,
+      "parameter": "group_1_eps_mu",
+      "trial_value": 2.9699999999999998
+    },
+    {
+      "base_value": 3.0,
+      "direction": "up",
+      "flex_R_MV_at_ref_CV": 21818.85540804505,
+      "market_R_MV_at_ref_CV": 22417.673984597313,
+      "monopoly_revenue": 21349.668319711986,
+      "parameter": "group_1_eps_mu",
+      "trial_value": 3.0300000000000002
+    },
+    {
+      "base_value": 0.1,
+      "direction": "down",
+      "flex_R_MV_at_ref_CV": 21818.85540804505,
+      "market_R_MV_at_ref_CV": 22417.673984597313,
+      "monopoly_revenue": 21322.646731448527,
+      "parameter": "group_1_eps_sigma",
+      "trial_value": 0.099
+    },
+    {
+      "base_value": 0.1,
+      "direction": "up",
+      "flex_R_MV_at_ref_CV": 21818.85540804505,
+      "market_R_MV_at_ref_CV": 22417.673984597313,
+      "monopoly_revenue": 21316.794691821684,
+      "parameter": "group_1_eps_sigma",
+      "trial_value": 0.101
+    },
+    {
+      "base_value": 2.5,
+      "direction": "down",
+      "flex_R_MV_at_ref_CV": 21794.10540804505,
+      "market_R_MV_at_ref_CV": 22392.79898459728,
+      "monopoly_revenue": 21319.718960790975,
+      "parameter": "group_1_mu_M",
+      "trial_value": 2.475
+    },
+    {
+      "base_value": 2.5,
+      "direction": "up",
+      "flex_R_MV_at_ref_CV": 21843.60540804505,
+      "market_R_MV_at_ref_CV": 22442.548984597342,
+      "monopoly_revenue": 21319.718960790975,
+      "parameter": "group_1_mu_M",
+      "trial_value": 2.525
+    },
+    {
+      "base_value": 0.5,
+      "direction": "down",
+      "flex_R_MV_at_ref_CV": 21823.80540804505,
+      "market_R_MV_at_ref_CV": 22422.6489845973,
+      "monopoly_revenue": 21319.718960790975,
+      "parameter": "group_1_mu_V",
+      "trial_value": 0.495
+    },
+    {
+      "base_value": 0.5,
+      "direction": "up",
+      "flex_R_MV_at_ref_CV": 21813.90540804505,
+      "market_R_MV_at_ref_CV": 22412.698984597322,
+      "monopoly_revenue": 21319.718960790975,
+      "parameter": "group_1_mu_V",
+      "trial_value": 0.505
+    },
+    {
+      "base_value": 0.1,
+      "direction": "down",
+      "flex_R_MV_at_ref_CV": 21820.47984288908,
+      "market_R_MV_at_ref_CV": 22419.48171059605,
+      "monopoly_revenue": 21319.718960790975,
+      "parameter": "group_1_sigma_M",
+      "trial_value": 0.099
+    },
+    {
+      "base_value": 0.1,
+      "direction": "up",
+      "flex_R_MV_at_ref_CV": 21817.222830415376,
+      "market_R_MV_at_ref_CV": 22415.85719703155,
+      "monopoly_revenue": 21319.718960790975,
+      "parameter": "group_1_sigma_M",
+      "trial_value": 0.101
+    },
+    {
+      "base_value": 0.1,
+      "direction": "down",
+      "flex_R_MV_at_ref_CV": 21820.47984288908,
+      "market_R_MV_at_ref_CV": 22419.48171059605,
+      "monopoly_revenue": 21319.718960790975,
+      "parameter": "group_1_sigma_V",
+      "trial_value": 0.099
+    },
+    {
+      "base_value": 0.1,
+      "direction": "up",
+      "flex_R_MV_at_ref_CV": 21817.222830415376,
+      "market_R_MV_at_ref_CV": 22415.85719703155,
+      "monopoly_revenue": 21319.718960790975,
+      "parameter": "group_1_sigma_V",
+      "trial_value": 0.101
+    },
+    {
+      "base_value": 200.0,
+      "direction": "down",
+      "flex_R_MV_at_ref_CV": 21797.803857055394,
+      "market_R_MV_at_ref_CV": 22408.310534077405,
+      "monopoly_revenue": 21319.71896079096,
+      "parameter": "group_2_N",
+      "trial_value": 198.0
+    },
+    {
+      "base_value": 200.0,
+      "direction": "up",
+      "flex_R_MV_at_ref_CV": 21839.42515647786,
+      "market_R_MV_at_ref_CV": 22427.032000537438,
+      "monopoly_revenue": 21319.71896079093,
+      "parameter": "group_2_N",
+      "trial_value": 202.0
+    },
+    {
+      "base_value": 3.0,
+      "direction": "down",
+      "flex_R_MV_at_ref_CV": 21818.855390281446,
+      "market_R_MV_at_ref_CV": 22417.673984597313,
+      "monopoly_revenue": 21319.718960790975,
+      "parameter": "group_2_alpha",
+      "trial_value": 2.9699999999999998
+    },
+    {
+      "base_value": 3.0,
+      "direction": "up",
+      "flex_R_MV_at_ref_CV": 21818.855417855488,
+      "market_R_MV_at_ref_CV": 22417.673984597313,
+      "monopoly_revenue": 21319.718960790975,
+      "parameter": "group_2_alpha",
+      "trial_value": 3.0300000000000002
+    },
+    {
+      "base_value": 0.6,
+      "direction": "down",
+      "flex_R_MV_at_ref_CV": 21818.85541556648,
+      "market_R_MV_at_ref_CV": 22417.673984597313,
+      "monopoly_revenue": 21319.718960790975,
+      "parameter": "group_2_beta",
+      "trial_value": 0.594
+    },
+    {
+      "base_value": 0.6,
+      "direction": "up",
+      "flex_R_MV_at_ref_CV": 21818.85539659513,
+      "market_R_MV_at_ref_CV": 22417.673984597313,
+      "monopoly_revenue": 21319.718960790975,
+      "parameter": "group_2_beta",
+      "trial_value": 0.606
+    },
+    {
+      "base_value": 2.0,
+      "direction": "down",
+      "flex_R_MV_at_ref_CV": 21818.85540804505,
+      "market_R_MV_at_ref_CV": 22417.673984597313,
+      "monopoly_revenue": 21319.718960790975,
+      "parameter": "group_2_eps_mu",
+      "trial_value": 1.98
+    },
+    {
+      "base_value": 2.0,
+      "direction": "up",
+      "flex_R_MV_at_ref_CV": 21818.85540804505,
+      "market_R_MV_at_ref_CV": 22417.673984597313,
+      "monopoly_revenue": 21319.718960790975,
+      "parameter": "group_2_eps_mu",
+      "trial_value": 2.02
+    },
+    {
+      "base_value": 1.0,
+      "direction": "down",
+      "flex_R_MV_at_ref_CV": 21818.85540804505,
+      "market_R_MV_at_ref_CV": 22417.673984597313,
+      "monopoly_revenue": 21319.718960790975,
+      "parameter": "group_2_eps_sigma",
+      "trial_value": 0.99
+    },
+    {
+      "base_value": 1.0,
+      "direction": "up",
+      "flex_R_MV_at_ref_CV": 21818.85540804505,
+      "market_R_MV_at_ref_CV": 22417.673984597313,
+      "monopoly_revenue": 21319.718960790975,
+      "parameter": "group_2_eps_sigma",
+      "trial_value": 1.01
+    },
+    {
+      "base_value": 1.5,
+      "direction": "down",
+      "flex_R_MV_at_ref_CV": 21818.85540804505,
+      "market_R_MV_at_ref_CV": 22417.673984597313,
+      "monopoly_revenue": 21319.718960790975,
+      "parameter": "group_2_mu_M",
+      "trial_value": 1.4849999999999999
+    },
+    {
+      "base_value": 1.5,
+      "direction": "up",
+      "flex_R_MV_at_ref_CV": 21818.85540804505,
+      "market_R_MV_at_ref_CV": 22417.673984597313,
+      "monopoly_revenue": 21319.718960790975,
+      "parameter": "group_2_mu_M",
+      "trial_value": 1.5150000000000001
+    },
+    {
+      "base_value": 2.5,
+      "direction": "down",
+      "flex_R_MV_at_ref_CV": 21818.85540474789,
+      "market_R_MV_at_ref_CV": 22417.673984597313,
+      "monopoly_revenue": 21319.718960790975,
+      "parameter": "group_2_mu_V",
+      "trial_value": 2.475
+    },
+    {
+      "base_value": 2.5,
+      "direction": "up",
+      "flex_R_MV_at_ref_CV": 21818.85541091129,
+      "market_R_MV_at_ref_CV": 22417.673984597313,
+      "monopoly_revenue": 21319.718960790975,
+      "parameter": "group_2_mu_V",
+      "trial_value": 2.525
+    },
+    {
+      "base_value": 1.0,
+      "direction": "down",
+      "flex_R_MV_at_ref_CV": 21818.85540804505,
+      "market_R_MV_at_ref_CV": 22417.673984597313,
+      "monopoly_revenue": 21319.718960790975,
+      "parameter": "group_2_sigma_M",
+      "trial_value": 0.99
+    },
+    {
+      "base_value": 1.0,
+      "direction": "up",
+      "flex_R_MV_at_ref_CV": 21818.85540804505,
+      "market_R_MV_at_ref_CV": 22417.673984597313,
+      "monopoly_revenue": 21319.718960790975,
+      "parameter": "group_2_sigma_M",
+      "trial_value": 1.01
+    },
+    {
+      "base_value": 1.0,
+      "direction": "down",
+      "flex_R_MV_at_ref_CV": 21818.855414001548,
+      "market_R_MV_at_ref_CV": 22417.673984597313,
+      "monopoly_revenue": 21319.718960790975,
+      "parameter": "group_2_sigma_V",
+      "trial_value": 0.99
+    },
+    {
+      "base_value": 1.0,
+      "direction": "up",
+      "flex_R_MV_at_ref_CV": 21818.855400055043,
+      "market_R_MV_at_ref_CV": 22417.673984597313,
+      "monopoly_revenue": 21319.718960790975,
+      "parameter": "group_2_sigma_V",
+      "trial_value": 1.01
+    },
+    {
+      "base_value": 900.0,
+      "direction": "down",
+      "flex_R_MV_at_ref_CV": 21732.224929931337,
+      "market_R_MV_at_ref_CV": 22375.49551723288,
+      "monopoly_revenue": 21319.71896079106,
+      "parameter": "group_3_N",
+      "trial_value": 891.0
+    },
+    {
+      "base_value": 900.0,
+      "direction": "up",
+      "flex_R_MV_at_ref_CV": 21904.663894125246,
+      "market_R_MV_at_ref_CV": 22459.74240073652,
+      "monopoly_revenue": 21319.718960791066,
+      "parameter": "group_3_N",
+      "trial_value": 909.0
+    },
+    {
+      "base_value": 2.0,
+      "direction": "down",
+      "flex_R_MV_at_ref_CV": 21686.915060759133,
+      "market_R_MV_at_ref_CV": 22417.673984597313,
+      "monopoly_revenue": 21319.718960790975,
+      "parameter": "group_3_alpha",
+      "trial_value": 1.98
+    },
+    {
+      "base_value": 2.0,
+      "direction": "up",
+      "flex_R_MV_at_ref_CV": 21950.377687545093,
+      "market_R_MV_at_ref_CV": 22417.673984597313,
+      "monopoly_revenue": 21319.718960790975,
+      "parameter": "group_3_alpha",
+      "trial_value": 2.02
+    },
+    {
+      "base_value": 0.6,
+      "direction": "down",
+      "flex_R_MV_at_ref_CV": 21959.838430450545,
+      "market_R_MV_at_ref_CV": 22417.673984597313,
+      "monopoly_revenue": 21319.718960790975,
+      "parameter": "group_3_beta",
+      "trial_value": 0.594
+    },
+    {
+      "base_value": 0.6,
+      "direction": "up",
+      "flex_R_MV_at_ref_CV": 21680.66412456826,
+      "market_R_MV_at_ref_CV": 22417.673984597313,
+      "monopoly_revenue": 21319.718960790975,
+      "parameter": "group_3_beta",
+      "trial_value": 0.606
+    },
+    {
+      "base_value": 2.0,
+      "direction": "down",
+      "flex_R_MV_at_ref_CV": 21818.85540804505,
+      "market_R_MV_at_ref_CV": 22417.673984597313,
+      "monopoly_revenue": 21319.718960790975,
+      "parameter": "group_3_eps_mu",
+      "trial_value": 1.98
+    },
+    {
+      "base_value": 2.0,
+      "direction": "up",
+      "flex_R_MV_at_ref_CV": 21818.85540804505,
+      "market_R_MV_at_ref_CV": 22417.673984597313,
+      "monopoly_revenue": 21319.718960790975,
+      "parameter": "group_3_eps_mu",
+      "trial_value": 2.02
+    },
+    {
+      "base_value": 0.8,
+      "direction": "down",
+      "flex_R_MV_at_ref_CV": 21818.85540804505,
+      "market_R_MV_at_ref_CV": 22417.673984597313,
+      "monopoly_revenue": 21319.718960790975,
+      "parameter": "group_3_eps_sigma",
+      "trial_value": 0.792
+    },
+    {
+      "base_value": 0.8,
+      "direction": "up",
+      "flex_R_MV_at_ref_CV": 21818.85540804505,
+      "market_R_MV_at_ref_CV": 22417.673984597313,
+      "monopoly_revenue": 21319.718960790975,
+      "parameter": "group_3_eps_sigma",
+      "trial_value": 0.808
+    },
+    {
+      "base_value": 1.5,
+      "direction": "down",
+      "flex_R_MV_at_ref_CV": 21818.85540804505,
+      "market_R_MV_at_ref_CV": 22417.673984597313,
+      "monopoly_revenue": 21319.718960790975,
+      "parameter": "group_3_mu_M",
+      "trial_value": 1.4849999999999999
+    },
+    {
+      "base_value": 1.5,
+      "direction": "up",
+      "flex_R_MV_at_ref_CV": 21818.85540804505,
+      "market_R_MV_at_ref_CV": 22417.673984597313,
+      "monopoly_revenue": 21319.718960790975,
+      "parameter": "group_3_mu_M",
+      "trial_value": 1.5150000000000001
+    },
+    {
+      "base_value": 1.5,
+      "direction": "down",
+      "flex_R_MV_at_ref_CV": 21790.49023811453,
+      "market_R_MV_at_ref_CV": 22417.673984597313,
+      "monopoly_revenue": 21319.718960790975,
+      "parameter": "group_3_mu_V",
+      "trial_value": 1.4849999999999999
+    },
+    {
+      "base_value": 1.5,
+      "direction": "up",
+      "flex_R_MV_at_ref_CV": 21846.755406122276,
+      "market_R_MV_at_ref_CV": 22417.673984597313,
+      "monopoly_revenue": 21319.718960790975,
+      "parameter": "group_3_mu_V",
+      "trial_value": 1.5150000000000001
+    },
+    {
+      "base_value": 0.8,
+      "direction": "down",
+      "flex_R_MV_at_ref_CV": 21818.85540804505,
+      "market_R_MV_at_ref_CV": 22417.673984597313,
+      "monopoly_revenue": 21319.718960790975,
+      "parameter": "group_3_sigma_M",
+      "trial_value": 0.792
+    },
+    {
+      "base_value": 0.8,
+      "direction": "up",
+      "flex_R_MV_at_ref_CV": 21818.85540804505,
+      "market_R_MV_at_ref_CV": 22417.673984597313,
+      "monopoly_revenue": 21319.718960790975,
+      "parameter": "group_3_sigma_M",
+      "trial_value": 0.808
+    },
+    {
+      "base_value": 0.8,
+      "direction": "down",
+      "flex_R_MV_at_ref_CV": 21839.19691430832,
+      "market_R_MV_at_ref_CV": 22417.673984597313,
+      "monopoly_revenue": 21319.718960790975,
+      "parameter": "group_3_sigma_V",
+      "trial_value": 0.792
+    },
+    {
+      "base_value": 0.8,
+      "direction": "up",
+      "flex_R_MV_at_ref_CV": 21798.15225226838,
+      "market_R_MV_at_ref_CV": 22417.673984597313,
+      "monopoly_revenue": 21319.718960790975,
+      "parameter": "group_3_sigma_V",
+      "trial_value": 0.808
+    },
+    {
+      "base_value": 700.0,
+      "direction": "down",
+      "flex_R_MV_at_ref_CV": 21818.85540804505,
+      "market_R_MV_at_ref_CV": 22384.878066673577,
+      "monopoly_revenue": 21319.718960791,
+      "parameter": "group_4_N",
+      "trial_value": 693.0
+    },
+    {
+      "base_value": 700.0,
+      "direction": "up",
+      "flex_R_MV_at_ref_CV": 21818.85540804505,
+      "market_R_MV_at_ref_CV": 22450.40332857091,
+      "monopoly_revenue": 21319.718960790924,
+      "parameter": "group_4_N",
+      "trial_value": 707.0
+    },
+    {
+      "base_value": 1.0,
+      "direction": "down",
+      "flex_R_MV_at_ref_CV": 21818.85540804505,
+      "market_R_MV_at_ref_CV": 22386.47647575254,
+      "monopoly_revenue": 21319.718960790975,
+      "parameter": "group_4_alpha",
+      "trial_value": 0.99
+    },
+    {
+      "base_value": 1.0,
+      "direction": "up",
+      "flex_R_MV_at_ref_CV": 21818.85540804505,
+      "market_R_MV_at_ref_CV": 22448.871493442,
+      "monopoly_revenue": 21319.718960790975,
+      "parameter": "group_4_alpha",
+      "trial_value": 1.01
+    },
+    {
+      "base_value": 1.0,
+      "direction": "down",
+      "flex_R_MV_at_ref_CV": 21818.85540804505,
+      "market_R_MV_at_ref_CV": 22500.058619293,
+      "monopoly_revenue": 21319.718960790975,
+      "parameter": "group_4_beta",
+      "trial_value": 0.99
+    },
+    {
+      "base_value": 1.0,
+      "direction": "up",
+      "flex_R_MV_at_ref_CV": 21818.85540804505,
+      "market_R_MV_at_ref_CV": 22336.920728806443,
+      "monopoly_revenue": 21319.718960790975,
+      "parameter": "group_4_beta",
+      "trial_value": 1.01
+    },
+    {
+      "base_value": 0.5,
+      "direction": "down",
+      "flex_R_MV_at_ref_CV": 21818.85540804505,
+      "market_R_MV_at_ref_CV": 22417.673984597313,
+      "monopoly_revenue": 21319.718960790975,
+      "parameter": "group_4_eps_mu",
+      "trial_value": 0.495
+    },
+    {
+      "base_value": 0.5,
+      "direction": "up",
+      "flex_R_MV_at_ref_CV": 21818.85540804505,
+      "market_R_MV_at_ref_CV": 22417.673984597313,
+      "monopoly_revenue": 21319.718960790975,
+      "parameter": "group_4_eps_mu",
+      "trial_value": 0.505
+    },
+    {
+      "base_value": 0.1,
+      "direction": "down",
+      "flex_R_MV_at_ref_CV": 21818.85540804505,
+      "market_R_MV_at_ref_CV": 22417.673984597313,
+      "monopoly_revenue": 21319.718960790975,
+      "parameter": "group_4_eps_sigma",
+      "trial_value": 0.099
+    },
+    {
+      "base_value": 0.1,
+      "direction": "up",
+      "flex_R_MV_at_ref_CV": 21818.85540804505,
+      "market_R_MV_at_ref_CV": 22417.673984597313,
+      "monopoly_revenue": 21319.718960790975,
+      "parameter": "group_4_eps_sigma",
+      "trial_value": 0.101
+    },
+    {
+      "base_value": 0.2,
+      "direction": "down",
+      "flex_R_MV_at_ref_CV": 21818.85540804505,
+      "market_R_MV_at_ref_CV": 22417.673984597313,
+      "monopoly_revenue": 21319.718960790975,
+      "parameter": "group_4_mu_M",
+      "trial_value": 0.198
+    },
+    {
+      "base_value": 0.2,
+      "direction": "up",
+      "flex_R_MV_at_ref_CV": 21818.85540804505,
+      "market_R_MV_at_ref_CV": 22417.673984597313,
+      "monopoly_revenue": 21319.718960790975,
+      "parameter": "group_4_mu_M",
+      "trial_value": 0.202
+    },
+    {
+      "base_value": 3.0,
+      "direction": "down",
+      "flex_R_MV_at_ref_CV": 21818.85540804505,
+      "market_R_MV_at_ref_CV": 22363.07698459727,
+      "monopoly_revenue": 21319.718960790975,
+      "parameter": "group_4_mu_V",
+      "trial_value": 2.9699999999999998
+    },
+    {
+      "base_value": 3.0,
+      "direction": "up",
+      "flex_R_MV_at_ref_CV": 21818.85540804505,
+      "market_R_MV_at_ref_CV": 22472.270984597264,
+      "monopoly_revenue": 21319.718960790975,
+      "parameter": "group_4_mu_V",
+      "trial_value": 3.0300000000000002
+    },
+    {
+      "base_value": 0.1,
+      "direction": "down",
+      "flex_R_MV_at_ref_CV": 21818.85540804505,
+      "market_R_MV_at_ref_CV": 22417.673984597313,
+      "monopoly_revenue": 21319.718960790975,
+      "parameter": "group_4_sigma_M",
+      "trial_value": 0.099
+    },
+    {
+      "base_value": 0.1,
+      "direction": "up",
+      "flex_R_MV_at_ref_CV": 21818.85540804505,
+      "market_R_MV_at_ref_CV": 22417.673984597313,
+      "monopoly_revenue": 21319.718960790975,
+      "parameter": "group_4_sigma_M",
+      "trial_value": 0.101
+    },
+    {
+      "base_value": 0.1,
+      "direction": "down",
+      "flex_R_MV_at_ref_CV": 21818.85540804505,
+      "market_R_MV_at_ref_CV": 22421.90770509325,
+      "monopoly_revenue": 21319.718960790975,
+      "parameter": "group_4_sigma_V",
+      "trial_value": 0.099
+    },
+    {
+      "base_value": 0.1,
+      "direction": "up",
+      "flex_R_MV_at_ref_CV": 21818.85540804505,
+      "market_R_MV_at_ref_CV": 22413.440264101377,
+      "monopoly_revenue": 21319.718960790975,
+      "parameter": "group_4_sigma_V",
+      "trial_value": 0.101
+    },
+    {
+      "base_value": 0.1,
+      "direction": "down",
+      "flex_R_MV_at_ref_CV": 21831.61209871248,
+      "market_R_MV_at_ref_CV": 22425.745361036465,
+      "monopoly_revenue": 21319.718960790975,
+      "parameter": "lambda",
+      "trial_value": 0.099
+    },
+    {
+      "base_value": 0.1,
+      "direction": "up",
+      "flex_R_MV_at_ref_CV": 21806.098717377616,
+      "market_R_MV_at_ref_CV": 22409.60260815816,
+      "monopoly_revenue": 21319.718960790975,
+      "parameter": "lambda",
+      "trial_value": 0.101
+    },
+    {
+      "base_value": 500.0,
+      "direction": "down",
+      "flex_R_MV_at_ref_CV": 21823.85540804505,
+      "market_R_MV_at_ref_CV": 22422.673984597313,
+      "monopoly_revenue": 21319.718960790975,
+      "parameter": "pi_V",
+      "trial_value": 495.0
+    },
+    {
+      "base_value": 500.0,
+      "direction": "up",
+      "flex_R_MV_at_ref_CV": 21813.85540804505,
+      "market_R_MV_at_ref_CV": 22412.673984597313,
+      "monopoly_revenue": 21319.718960790975,
+      "parameter": "pi_V",
+      "trial_value": 505.0
+    },
+    {
+      "base_value": 0.01,
+      "direction": "down",
+      "flex_R_MV_at_ref_CV": 21818.85540804505,
+      "market_R_MV_at_ref_CV": 22416.988151017133,
+      "monopoly_revenue": 21319.718960790975,
+      "parameter": "zeta",
+      "trial_value": 0.0099
+    },
+    {
+      "base_value": 0.01,
+      "direction": "up",
+      "flex_R_MV_at_ref_CV": 21818.85540804505,
+      "market_R_MV_at_ref_CV": 22418.35385774118,
+      "monopoly_revenue": 21319.718960790975,
+      "parameter": "zeta",
+      "trial_value": 0.0101
+    }
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "group_parameter_differences": [
+    {
+      "differences": {
+        "N": 0.0,
+        "alpha": 0.0,
+        "beta": 0.0,
+        "epsilon.mu": 0.0,
+        "epsilon.sigma": 0.0,
+        "epsilon_M.mu": 0.0,
+        "epsilon_M.sigma": 0.0,
+        "epsilon_V.mu": 0.0,
+        "epsilon_V.sigma": 0.0
+      },
+      "group_index": 1
+    },
+    {
+      "differences": {
+        "N": 0.0,
+        "alpha": 0.0,
+        "beta": 0.0,
+        "epsilon.mu": 0.0,
+        "epsilon.sigma": 0.0,
+        "epsilon_M.mu": 0.0,
+        "epsilon_M.sigma": 0.0,
+        "epsilon_V.mu": 0.0,
+        "epsilon_V.sigma": 0.0
+      },
+      "group_index": 2
+    },
+    {
+      "differences": {
+        "N": 0.0,
+        "alpha": 0.0,
+        "beta": 0.0,
+        "epsilon.mu": 0.0,
+        "epsilon.sigma": 0.0,
+        "epsilon_M.mu": 0.0,
+        "epsilon_M.sigma": 0.0,
+        "epsilon_V.mu": 0.0,
+        "epsilon_V.sigma": 0.0
+      },
+      "group_index": 3
+    },
+    {
+      "differences": {
+        "N": 0.0,
+        "alpha": 0.0,
+        "beta": 0.0,
+        "epsilon.mu": 0.0,
+        "epsilon.sigma": 0.0,
+        "epsilon_M.mu": 0.0,
+        "epsilon_M.sigma": 0.0,
+        "epsilon_V.mu": 0.0,
+        "epsilon_V.sigma": 0.0
+      },
+      "group_index": 4
+    }
+  ],
+  "matches_paper_simulation_table": false,
+  "scalar_parameter_differences": {
+    "C": 0.0,
+    "delta": -0.09000000000000001,
+    "lambda": 0.0,
+    "pi_V": 0.0,
+    "zeta": 0.0
+  }
+}

@@ -1,0 +1,84 @@
+{
+  "0.01": {
+    "flex_at_reference_capacity": {
+      "C_V": 350.0,
+      "best_R_MV": 21818.85540804505,
+      "best_R_V_retained": 1775.6690667431224,
+      "best_R_V_subscriber": 12756.690667431223,
+      "best_R_industry_net": 23594.52447478817,
+      "best_method": "default:least_squares",
+      "best_n_M": 198.0,
+      "best_n_V": 1020.0,
+      "best_p_M": 54.73653438059064,
+      "best_p_V": 12.506559477873749,
+      "best_r_M": 328.2828282828283,
+      "best_r_V": 34.31372549019608,
+      "best_residual_inf": 2.842170943040401e-14
+    },
+    "market_at_reference_capacity": {
+      "C_V": 100.0,
+      "best_R_MV": 22417.673984597313,
+      "best_R_V_retained": 1307.1376439152455,
+      "best_R_V_subscriber": 8071.376439152453,
+      "best_R_industry_net": 23724.811628512558,
+      "best_n_M": 199.0,
+      "best_n_V": 1801.0,
+      "best_p_M": 78.660478338493,
+      "best_p_V": 4.4816082393961425,
+      "best_r_M": 452.2613065326633,
+      "best_r_V": 5.5524708495280395,
+      "best_residual": 2.2737367544323206e-13
+    },
+    "monopoly": {
+      "critical_price": 118.61632918473211,
+      "optimal_price": 106.77900329046938,
+      "optimal_revenue": 21319.718960790975,
+      "optimal_subscribers": 199.6620899597204,
+      "optimal_target_rate": 500.84620480619975,
+      "optimizer_method": "scipy.optimize.minimize_scalar(method='bounded')",
+      "optimizer_nfev": 18,
+      "optimizer_success": true
+    }
+  },
+  "0.1": {
+    "flex_at_reference_capacity": {
+      "C_V": 350.0,
+      "best_R_MV": 15293.392010669922,
+      "best_R_V_retained": 1089.2384944823511,
+      "best_R_V_subscriber": 5892.3849448235105,
+      "best_R_industry_net": 16382.630505152272,
+      "best_method": "default:least_squares",
+      "best_n_M": 198.0,
+      "best_n_V": 1645.0,
+      "best_p_M": 52.981038183478596,
+      "best_p_V": 3.581996926944383,
+      "best_r_M": 32.82828282828283,
+      "best_r_V": 2.127659574468085,
+      "best_residual_inf": 5.684341886080802e-14
+    },
+    "market_at_reference_capacity": {
+      "C_V": 100.0,
+      "best_R_MV": 3027.726607083045,
+      "best_R_V_retained": 599.3862335147617,
+      "best_R_V_subscriber": 993.8623351476166,
+      "best_R_industry_net": 3627.112840597807,
+      "best_n_M": 1764.0,
+      "best_n_V": 236.0,
+      "best_p_M": 1.4927723953799266,
+      "best_p_V": 4.2112810811339685,
+      "best_r_M": 5.1020408163265305,
+      "best_r_V": 4.23728813559322,
+      "best_residual": 6.183995537867304e-10
+    },
+    "monopoly": {
+      "critical_price": 119.43875599820765,
+      "optimal_price": 72.3398152592349,
+      "optimal_revenue": 14426.941532580156,
+      "optimal_subscribers": 199.43293303805353,
+      "optimal_target_rate": 50.142169839581676,
+      "optimizer_method": "scipy.optimize.minimize_scalar(method='bounded')",
+      "optimizer_nfev": 16,
+      "optimizer_success": true
+    }
+  }
+}
